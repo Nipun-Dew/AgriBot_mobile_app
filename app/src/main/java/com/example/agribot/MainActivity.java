@@ -167,12 +167,14 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             case R.id.logoutMenu: {
                 finish();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                break;
             }
             case R.id.settingsMenu: {
-
+                break;
             }
             case R.id.deviceInfo: {
                 startActivity(new Intent(MainActivity.this, DeviceInfoActivity.class));
+                break;
             }
         }
         return super.onOptionsItemSelected(item);
