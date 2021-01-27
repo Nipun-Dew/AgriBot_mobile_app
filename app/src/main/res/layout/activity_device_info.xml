@@ -1,0 +1,166 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".DeviceInfoActivity">
+
+    <TextView
+        android:id="@+id/textViewDeviceTitle"
+        android:layout_width="170dp"
+        android:layout_height="34dp"
+        android:text="@string/device_info2"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.543"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.082" />
+
+    <TextView
+        android:id="@+id/textViewVer"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="140dp"
+        android:textSize="18sp"
+        android:text="@string/version"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.162"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewChip"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/chipset"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.162"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewVer" />
+
+    <TextView
+        android:id="@+id/textViewID"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/product_id"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.171"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewChip" />
+
+    <TextView
+        android:id="@+id/textViewPasswrd"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:textSize="18sp"
+        android:text="@string/password"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.169"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewID" />
+
+    <TextView
+        android:id="@+id/textViewOwn"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/owner"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.159"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPasswrd" />
+
+    <TextView
+        android:id="@+id/textViewIM"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="32dp"
+        android:text="@string/imei"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.154"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOwn" />
+
+    <TextView
+        android:id="@+id/textViewVersionData"
+        android:layout_width="200dp"
+        android:layout_height="29dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="140dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewVer"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewChipData"
+        android:layout_width="199dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="60dp"
+        android:layout_marginTop="24dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewChip"
+        app:layout_constraintTop_toBottomOf="@+id/textViewVersionData" />
+
+    <TextView
+        android:id="@+id/textViewIDData"
+        android:layout_width="198dp"
+        android:layout_height="27dp"
+        android:layout_marginStart="36dp"
+        android:layout_marginTop="32dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewID"
+        app:layout_constraintTop_toBottomOf="@+id/textViewChipData" />
+
+    <TextView
+        android:id="@+id/textViewPasswwordData"
+        android:layout_width="197dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginTop="28dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewPasswrd"
+        app:layout_constraintTop_toBottomOf="@+id/textViewIDData" />
+
+    <TextView
+        android:id="@+id/textViewOwnerData"
+        android:layout_width="207dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="64dp"
+        android:layout_marginTop="28dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewOwn"
+        app:layout_constraintTop_toBottomOf="@+id/textViewPasswwordData" />
+
+    <TextView
+        android:id="@+id/textViewImiData"
+        android:layout_width="203dp"
+        android:layout_height="28dp"
+        android:layout_marginStart="80dp"
+        android:layout_marginTop="28dp"
+        android:textSize="18sp"
+        app:layout_constraintStart_toEndOf="@+id/textViewIM"
+        app:layout_constraintTop_toBottomOf="@+id/textViewOwnerData" />
+
+    <Button
+        android:id="@+id/closeInfo"
+        android:layout_width="222dp"
+        android:layout_height="37dp"
+        android:textSize="18sp"
+        android:layout_marginBottom="80dp"
+        android:text="@string/close"
+        android:background="@drawable/custom_default_btn"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.501"
+        app:layout_constraintStart_toStartOf="parent" />
+</androidx.constraintlayout.widget.ConstraintLayout>

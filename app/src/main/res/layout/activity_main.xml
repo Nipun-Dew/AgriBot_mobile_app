@@ -1,0 +1,211 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".MainActivity">
+
+    <TextView
+        android:id="@+id/textViewMsg"
+        android:layout_width="221dp"
+        android:layout_height="69dp"
+        android:layout_marginBottom="140dp"
+        android:fontFamily="sans-serif-medium"
+        android:text="@string/mqtt_message"
+        android:textAlignment="center"
+        android:textSize="24sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintStart_toStartOf="parent"
+        tools:ignore="HardcodedText" />
+
+    <Button
+        android:id="@+id/button"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="32dp"
+        android:layout_marginBottom="240dp"
+        android:background="@drawable/custom_control_btn"
+        android:onClick="publishStartSignalToBroker"
+        android:text="@string/start"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button2"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginEnd="216dp"
+        android:layout_marginBottom="240dp"
+        android:background="@drawable/custom_control_btn"
+        android:onClick="publishPauseSignalToBroker"
+        android:text="@string/pause"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <Button
+        android:id="@+id/button3"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="216dp"
+        android:layout_marginBottom="240dp"
+        android:background="@drawable/custom_control_btn"
+        android:onClick="publishStopSignalToBroker"
+        android:text="@string/stop"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <Button
+        android:id="@+id/button4"
+        android:layout_width="70dp"
+        android:layout_height="70dp"
+        android:layout_marginStart="312dp"
+        android:layout_marginBottom="240dp"
+        android:background="@drawable/custom_control_btn"
+        android:onClick="publishResetSignalToBroker"
+        android:text="@string/reset"
+        android:textColor="@android:color/white"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <EditText
+        android:id="@+id/editText1"
+        android:layout_width="143dp"
+        android:layout_height="48dp"
+        android:layout_marginTop="60dp"
+        android:autofillHints=""
+        android:background="@drawable/input_box"
+        android:drawableStart="@drawable/edit_icon"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:inputType="number"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.152"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText2"
+        android:layout_width="151dp"
+        android:layout_height="46dp"
+        android:layout_marginTop="60dp"
+        android:autofillHints=""
+        android:background="@drawable/input_box"
+        android:ems="10"
+        android:drawableStart="@drawable/edit_icon"
+        android:drawablePadding="12dp"
+        android:inputType="number"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintStart_toEndOf="@+id/editText1"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <EditText
+        android:id="@+id/editText3"
+        android:layout_width="140dp"
+        android:layout_height="48dp"
+        android:autofillHints=""
+        android:background="@drawable/input_box"
+        android:ems="10"
+        android:drawableStart="@drawable/edit_icon"
+        android:drawablePadding="12dp"
+        android:inputType="number"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.151"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText1"
+        app:layout_constraintVertical_bias="0.116" />
+
+    <EditText
+        android:id="@+id/editText4"
+        android:layout_width="151dp"
+        android:layout_height="48dp"
+        android:autofillHints=""
+        android:background="@drawable/input_box"
+        android:ems="10"
+        android:drawableStart="@drawable/edit_icon"
+        android:drawablePadding="12dp"
+        android:inputType="number"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.834"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintVertical_bias="0.12" />
+
+    <Button
+        android:id="@+id/button5"
+        android:layout_width="140dp"
+        android:layout_height="40dp"
+        android:layout_marginTop="228dp"
+        android:background="@drawable/custom_default_btn"
+        android:onClick="publishMapDataToBroker"
+        android:text="@string/set"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.506"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewRL"
+        android:layout_width="139dp"
+        android:layout_height="21dp"
+        android:text="@string/row_length_cm"
+        app:layout_constraintBottom_toTopOf="@+id/editText1"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.198"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.769" />
+
+    <TextView
+        android:id="@+id/textViewSG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gap_between_two_seeds_cm"
+        app:layout_constraintBottom_toTopOf="@+id/editText2"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.317"
+        app:layout_constraintStart_toEndOf="@+id/textViewRL"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.731" />
+
+    <TextView
+        android:id="@+id/textViewNR"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/number_of_rows"
+        app:layout_constraintBottom_toTopOf="@+id/editText3"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.205"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.921" />
+
+    <TextView
+        android:id="@+id/textViewRG"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="@string/gap_between_two_rows_cm"
+        app:layout_constraintBottom_toTopOf="@+id/editText4"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.578"
+        app:layout_constraintStart_toEndOf="@+id/textViewNR"
+        app:layout_constraintTop_toBottomOf="@+id/editText2"
+        app:layout_constraintVertical_bias="0.685" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>
