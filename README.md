@@ -43,9 +43,7 @@ a user friendly mobile app.
 Because in greenhouses every condition which plant will be depend, is measured and controlled accurately and another thing is there are tap
 lines all over the place. For areas like this you cant use heavy machinaries or drones to seed plants and AgriBot is the perfect solution.
 	</div><br>
-	</p>
-	
-   <img src="docs/assets/img/diagrams/dig1.jpg" width="600" height="400" > 
+	</p> 
 	
    <h4>Advisers</h4>
     <div> Dr Isuru Nawinna </div>
