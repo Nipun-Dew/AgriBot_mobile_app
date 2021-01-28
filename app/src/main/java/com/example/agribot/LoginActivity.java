@@ -113,8 +113,8 @@ public class LoginActivity extends AppCompatActivity {
                     if (user.getPassword().equals(user_password)) {
                         finish();
                         loginID = product_ID;
-                        finish();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
                     } else {
                         userProductId.setText("");
                         userPassword.setText("");

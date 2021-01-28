@@ -137,9 +137,12 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
 
         } catch (MqttException e) {
             e.printStackTrace();
-            robotStat.setText(R.string.notConnect);
-            robotStat.setBackgroundResource(R.drawable.ic_disconnected);
-            Toast.makeText(MainActivity.this, "Connection Timeout!!!", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Connection Timeout!!!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
+            //robotStat.setText(R.string.notConnect);
+            //robotStat.setBackgroundResource(R.drawable.ic_disconnected);
+            //Toast.makeText(MainActivity.this, "Connection Timeout!!!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -194,8 +197,8 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logoutMenu: {
-                finish();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
                 break;
             }
             case R.id.settingsMenu: {
@@ -211,6 +214,9 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
 
     @Override
     public void connectionLost(Throwable cause) {
+        robotStat.setText(R.string.notConnect);
+        robotStat.setBackgroundResource(R.drawable.ic_disconnected);
+        Toast.makeText(MainActivity.this, "Connection Lost!!!", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "connectionLost");
     }
 
