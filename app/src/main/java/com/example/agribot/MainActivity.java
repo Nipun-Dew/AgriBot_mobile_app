@@ -3,12 +3,14 @@ package com.example.agribot;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -23,6 +25,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
@@ -35,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     private final String topic = "test1";
     private MqttClient client;
     private FirebaseDatabase firebaseDatabase;
+    private TextView robotStat;
+    private Button reconnect;
 
     public void publishStartSignalToBroker(View view) {
         try {
@@ -113,15 +118,28 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         }
     }
 
+    @SuppressLint("WrongConstant")
     private void subscribeToBroker() {
         try {
+            MqttConnectOptions extraOps = new MqttConnectOptions();
+            extraOps.setConnectionTimeout(3);
+            extraOps.setAutomaticReconnect(true);
+
             this.client = new MqttClient("tcp://192.168.1.4:1883", "AndroidThingSub", new MemoryPersistence());
             this.client.setCallback((MqttCallback) this);
-            this.client.connect();
+            this.client.connect(extraOps);
+            robotStat.setText(R.string.connectBroker);
+            robotStat.setBackgroundResource(R.drawable.ic_connected);
+            reconnect.setVisibility(View.INVISIBLE);
             this.client.subscribe(this.topic);
+
             Log.d(TAG, "connectionLost");
+
         } catch (MqttException e) {
             e.printStackTrace();
+            robotStat.setText(R.string.notConnect);
+            robotStat.setBackgroundResource(R.drawable.ic_disconnected);
+            Toast.makeText(MainActivity.this, "Connection Timeout!!!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -149,6 +167,17 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        robotStat = findViewById(R.id.textViewBrokerStat);
+        reconnect = findViewById(R.id.buttonReconnect);
+        reconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subscribeToBroker();
+            }
+        });
+        //robotStat.setText(R.string.notConnect);
+        //robotStat.setBackgroundResource(R.);
 
         getProductID();
 

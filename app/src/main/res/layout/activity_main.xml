@@ -8,16 +8,16 @@
 
     <TextView
         android:id="@+id/textViewMsg"
-        android:layout_width="221dp"
-        android:layout_height="69dp"
-        android:layout_marginBottom="140dp"
+        android:layout_width="207dp"
+        android:layout_height="54dp"
+        android:layout_marginBottom="160dp"
         android:fontFamily="sans-serif-medium"
         android:text="@string/mqtt_message"
         android:textAlignment="center"
         android:textSize="24sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.536"
+        app:layout_constraintHorizontal_bias="0.514"
         app:layout_constraintStart_toStartOf="parent"
         tools:ignore="HardcodedText" />
 
@@ -207,5 +207,49 @@
         app:layout_constraintStart_toEndOf="@+id/textViewNR"
         app:layout_constraintTop_toBottomOf="@+id/editText2"
         app:layout_constraintVertical_bias="0.685" />
+
+    <TextView
+        android:id="@+id/textViewBrokerStat"
+        android:layout_width="200dp"
+        android:layout_height="39dp"
+        android:layout_marginBottom="88dp"
+        android:drawablePadding="8dp"
+        android:paddingTop="7dp"
+        android:text=""
+        android:textAlignment="center"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.194"
+        app:layout_constraintStart_toStartOf="parent" />
+
+    <TextView
+        android:id="@+id/textViewDeviceStat"
+        android:layout_width="201dp"
+        android:layout_height="39dp"
+        android:text="TextView"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.195"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewBrokerStat"
+        app:layout_constraintVertical_bias="0.306" />
+
+    <Button
+        android:id="@+id/buttonReconnect"
+        android:layout_width="67dp"
+        android:layout_height="35dp"
+        android:layout_marginBottom="88dp"
+        android:background="@drawable/custom_control_btn"
+        android:text="@string/connect"
+        android:textColor="@android:color/white"
+        android:textSize="10sp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.473"
+        app:layout_constraintStart_toEndOf="@+id/textViewBrokerStat"
+        tools:ignore="SmallSp" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
