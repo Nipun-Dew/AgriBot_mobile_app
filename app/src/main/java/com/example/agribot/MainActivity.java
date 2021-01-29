@@ -28,14 +28,17 @@ import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import java.util.Objects;
 
+import static com.example.agribot.LoginActivity.userTopic;
+
 public class MainActivity extends AppCompatActivity implements MqttCallback {
 
     private static final String TAG = "MyActivity";
-    private final String topic = "test1";
+    String topic = userTopic;
     private MqttClient client;
     private FirebaseDatabase firebaseDatabase;
     private TextView deviceStat;
@@ -44,7 +47,8 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         try {
             MqttMessage msg = new MqttMessage("start".getBytes());
             msg.setQos(1);
-            this.client.publish(this.topic, msg);
+            String startSignalTopic = topic + "/Data";
+            this.client.publish(startSignalTopic, msg);
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -54,7 +58,8 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         try {
             MqttMessage msg = new MqttMessage("pause".getBytes());
             msg.setQos(2);
-            this.client.publish(this.topic, msg);
+            String pauseSignalTopic = topic + "/Data";
+            this.client.publish(pauseSignalTopic, msg);
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -64,7 +69,8 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         try {
             MqttMessage msg = new MqttMessage("stop".getBytes());
             msg.setQos(2);
-            this.client.publish(this.topic, msg);
+            String stopSignalTopic = topic + "/Data";
+            this.client.publish(stopSignalTopic, msg);
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -74,7 +80,8 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         try {
             MqttMessage msg = new MqttMessage("reset".getBytes());
             msg.setQos(2);
-            this.client.publish(this.topic, msg);
+            String resetSignalTopic = topic + "/Data";
+            this.client.publish(resetSignalTopic, msg);
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -106,7 +113,8 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             try {
                 MqttMessage msg = new MqttMessage(mapData.getBytes());
                 msg.setQos(2);
-                this.client.publish(this.topic, msg);
+                String mapDataTopic = topic + "/Data";
+                this.client.publish(mapDataTopic, msg);
             } catch (MqttException e) {
                 e.printStackTrace();
             }
@@ -124,10 +132,13 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             extraOps.setConnectionTimeout(3);
             extraOps.setAutomaticReconnect(true);
 
+            String subscriberTopic = topic + "/#";
+            MqttTopic.validate(this.topic, true);
+
             this.client = new MqttClient("tcp://54.237.80.79:1883", "AndroidThingSub", new MemoryPersistence());
             this.client.setCallback((MqttCallback) this);
             this.client.connect(extraOps);
-            this.client.subscribe(this.topic);
+            this.client.subscribe(subscriberTopic);
 
             Log.d(TAG, "connectionLost");
 
@@ -169,8 +180,6 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
 
         TextView device = findViewById(R.id.textViewDevice);
         deviceStat = findViewById(R.id.textViewDeviceStat);
-        //robotStat.setText(R.string.notConnect);
-        //robotStat.setBackgroundResource(R.);
 
         getProductID();
 
@@ -210,15 +219,25 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
 
     @SuppressLint("SetTextI18n")
     @Override
-    public void messageArrived(String topic, MqttMessage message) throws Exception {
+    public void messageArrived(String inputTopic, MqttMessage message) throws Exception {
         String payload = new String(message.getPayload());
-        if (payload.equals("connected")) {
-            deviceStat.setText("Connected");
+        if (inputTopic.equals(topic + "/State")) {
+            deviceStat.setText("connected");
             deviceStat.setBackgroundResource(R.drawable.ic_connected);
         }
-        TextView publishedData = findViewById(R.id.textViewMsg);
-        publishedData.setText(payload);
-        Log.d(TAG, payload);
+        if (inputTopic.equals(topic + "/Sensor/Temperature")) {
+            TextView publishedData = findViewById(R.id.textViewMsg);
+            publishedData.setText(payload);
+            Log.d(TAG, payload);
+        }
+        if (inputTopic.equals(topic + "/Sensor/Humidity")) {
+            TextView publishedData = findViewById(R.id.textViewMsg);
+            publishedData.setText(payload);
+            Log.d(TAG, payload);
+        }
+        //TextView publishedData = findViewById(R.id.textViewMsg);
+        //publishedData.setText(payload);
+        //Log.d(TAG, payload);
     }
 
     @Override

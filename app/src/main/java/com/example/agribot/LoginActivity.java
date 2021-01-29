@@ -30,6 +30,7 @@ public class LoginActivity extends AppCompatActivity {
     private ProgressDialog progressDialog;
 
     public static String loginID;
+    public static String userTopic;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -90,6 +91,10 @@ public class LoginActivity extends AppCompatActivity {
             return owner;
         }
 
+        public String getTopic() {
+            return topic;
+        }
+
         public String getDate() {
             return date;
         }
@@ -113,6 +118,7 @@ public class LoginActivity extends AppCompatActivity {
                     if (user.getPassword().equals(user_password)) {
                         finish();
                         loginID = product_ID;
+                        userTopic = user.getTopic();
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
                         finish();
                     } else {
