@@ -9,7 +9,6 @@ import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -23,10 +22,7 @@ public class LoginActivity extends AppCompatActivity {
 
     private EditText userProductId;
     private EditText userPassword;
-    private TextView productIDInfo;
-    private TextView productPasswordInfo;
     private Button loginBtn;
-    private FirebaseDatabase firebaseDatabase;
     private ProgressDialog progressDialog;
 
     public static String loginID;
@@ -106,7 +102,7 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Logging In...");
         progressDialog.show();
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myDBRef = firebaseDatabase.getReference(product_ID);
         myDBRef.addValueEventListener(new ValueEventListener() {
             @Override
@@ -144,7 +140,7 @@ public class LoginActivity extends AppCompatActivity {
         userProductId = (EditText) findViewById(R.id.editTextLoginMail);
         userPassword = (EditText) findViewById(R.id.editTextLoginPasswrd);
         loginBtn = (Button) findViewById(R.id.Loginbutton);
-        productIDInfo = (TextView) findViewById(R.id.textViewProdID);
-        productPasswordInfo = (TextView) findViewById(R.id.textViewProdPassword);
+        TextView productIDInfo = (TextView) findViewById(R.id.textViewProdID);
+        TextView productPasswordInfo = (TextView) findViewById(R.id.textViewProdPassword);
     }
 }

@@ -161,9 +161,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
                 LoginActivity.User user = snapshot.getValue(LoginActivity.User.class);
-                TextView productIDMsg = findViewById(R.id.textViewMsg);
                 assert user != null;
-                productIDMsg.setText(user.getOwner());
             }
 
             @Override
@@ -226,18 +224,15 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             deviceStat.setBackgroundResource(R.drawable.ic_connected);
         }
         if (inputTopic.equals(topic + "/Sensor/Temperature")) {
-            TextView publishedData = findViewById(R.id.textViewMsg);
-            publishedData.setText(payload);
+            TextView tempData = findViewById(R.id.textViewTempVal);
+            tempData.setText(payload);
             Log.d(TAG, payload);
         }
         if (inputTopic.equals(topic + "/Sensor/Humidity")) {
-            TextView publishedData = findViewById(R.id.textViewMsg);
-            publishedData.setText(payload);
+            TextView humidData = findViewById(R.id.textViewHumVal);
+            humidData.setText(payload);
             Log.d(TAG, payload);
         }
-        //TextView publishedData = findViewById(R.id.textViewMsg);
-        //publishedData.setText(payload);
-        //Log.d(TAG, payload);
     }
 
     @Override

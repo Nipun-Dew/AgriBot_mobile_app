@@ -6,20 +6,35 @@
     android:layout_height="match_parent"
     tools:context=".MainActivity">
 
-    <TextView
-        android:id="@+id/textViewMsg"
-        android:layout_width="207dp"
-        android:layout_height="54dp"
-        android:layout_marginBottom="160dp"
-        android:fontFamily="sans-serif-medium"
-        android:text="@string/mqtt_message"
-        android:textAlignment="center"
-        android:textSize="24sp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.514"
-        app:layout_constraintStart_toStartOf="parent"
-        tools:ignore="HardcodedText" />
+   <TextView
+       android:id="@+id/textViewTemp"
+       android:layout_width="186dp"
+       android:layout_height="38dp"
+       android:layout_marginBottom="168dp"
+       android:fontFamily="sans-serif-medium"
+       android:text="Temperature"
+       android:textAlignment="center"
+       android:textSize="20sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.084"
+       app:layout_constraintStart_toStartOf="parent"
+       tools:ignore="HardcodedText" />
+
+   <TextView
+       android:id="@+id/textViewHum"
+       android:layout_width="186dp"
+       android:layout_height="38dp"
+       android:layout_marginBottom="168dp"
+       android:fontFamily="sans-serif-medium"
+       android:text="Humidity"
+       android:textAlignment="center"
+       android:textSize="20sp"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="1.0"
+       app:layout_constraintStart_toStartOf="parent"
+       tools:ignore="HardcodedText" />
 
     <Button
         android:id="@+id/button"
@@ -213,29 +228,59 @@
         android:id="@+id/textViewDeviceStat"
         android:layout_width="150dp"
         android:layout_height="39dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="56dp"
         android:background="@drawable/ic_disconnected"
-        android:paddingTop="7dp"
+        android:paddingTop="3dp"
         android:text="Disconnect"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="22sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.478"
+        app:layout_constraintHorizontal_bias="0.498"
         app:layout_constraintStart_toStartOf="parent" />
 
     <TextView
         android:id="@+id/textViewDevice"
         android:layout_width="89dp"
         android:layout_height="31dp"
-        android:layout_marginBottom="72dp"
+        android:layout_marginBottom="59dp"
         android:text="Device"
         android:textAlignment="center"
-        android:textSize="18sp"
+        android:textSize="20sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textViewDeviceStat"
-        app:layout_constraintHorizontal_bias="0.694"
+        app:layout_constraintHorizontal_bias="0.78"
+        app:layout_constraintStart_toStartOf="parent" />
+
+   <TextView
+       android:id="@+id/textViewTempVal"
+       android:layout_width="77dp"
+       android:layout_height="35dp"
+       android:layout_marginBottom="132dp"
+       android:paddingTop="6dp"
+       android:text=""
+       android:textAlignment="center"
+       android:textColor="@android:color/white"
+       android:background="@drawable/ic_sensor"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.212"
+       app:layout_constraintStart_toStartOf="parent" />
+
+   <TextView
+       android:id="@+id/textViewHumVal"
+       android:layout_width="77dp"
+       android:layout_height="35dp"
+       android:layout_marginBottom="132dp"
+       android:background="@drawable/ic_sensor"
+       android:paddingTop="6dp"
+       android:text=""
+       android:textAlignment="center"
+       android:textColor="@android:color/white"
+       app:layout_constraintBottom_toBottomOf="parent"
+       app:layout_constraintEnd_toEndOf="parent"
+       app:layout_constraintHorizontal_bias="0.838"
         app:layout_constraintStart_toStartOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
