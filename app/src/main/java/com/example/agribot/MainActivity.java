@@ -23,6 +23,7 @@ import com.google.firebase.database.ValueEventListener;
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
 import org.eclipse.paho.client.mqttv3.MqttClient;
+import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
@@ -60,7 +61,11 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         try {
             MqttMessage msg = new MqttMessage("stop".getBytes());
             msg.setQos(2);
-            this.client.publish(this.topic, msg);
+            if(this.client.isConnected()) {
+                this.client.publish(this.topic, msg);
+            }else{
+                Log.d(TAG, "connectionLost");
+            }
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -117,7 +122,14 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         try {
             this.client = new MqttClient("tcp://192.168.1.4:1883", "AndroidThingSub", new MemoryPersistence());
             this.client.setCallback((MqttCallback) this);
-            this.client.connect();
+
+            MqttConnectOptions authen = new MqttConnectOptions();
+           // authen.setUserName(userName);
+            //authen.setPassword(password.toCharArray());
+            authen.setKeepAliveInterval(30);
+            authen.setConnectionTimeout(10);
+
+            this.client.connect(authen);
             this.client.subscribe(this.topic);
             Log.d(TAG, "connectionLost");
         } catch (MqttException e) {
