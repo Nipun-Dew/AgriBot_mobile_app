@@ -125,17 +125,16 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     @SuppressLint("WrongConstant")
     private void subscribeToBroker() {
         try {
+            this.client = new MqttClient("tcp://54.237.80.79:1883", "AndroidThingSub", new MemoryPersistence());
+            this.client.setCallback((MqttCallback) this);
+
             MqttConnectOptions extraOps = new MqttConnectOptions();
             extraOps.setConnectionTimeout(3);
             extraOps.setAutomaticReconnect(true);
+            extraOps.setKeepAliveInterval(15);
             //extraOps.setUserName("metana username eka dapan");
             //extraOps.setPassword(metana password eka dapan);
-
-
-            this.client = new MqttClient("tcp://54.210.123.110:1883", "AndroidThingSub", new MemoryPersistence());
-
-            this.client.setCallback((MqttCallback) this);
-
+            extraOps.setCleanSession(false);
 
             this.client.connect(extraOps);
             robotStat.setText(R.string.connectBroker);
