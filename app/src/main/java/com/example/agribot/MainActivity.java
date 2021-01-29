@@ -125,7 +125,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             extraOps.setConnectionTimeout(3);
             extraOps.setAutomaticReconnect(true);
 
-            this.client = new MqttClient("tcp://192.168.1.4:1883", "AndroidThingSub", new MemoryPersistence());
+            this.client = new MqttClient("tcp://54.210.123.110:1883", "AndroidThingSub", new MemoryPersistence());
             this.client.setCallback((MqttCallback) this);
             this.client.connect(extraOps);
             robotStat.setText(R.string.connectBroker);
