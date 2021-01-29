@@ -128,24 +128,17 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             MqttConnectOptions extraOps = new MqttConnectOptions();
             extraOps.setConnectionTimeout(3);
             extraOps.setAutomaticReconnect(true);
+            //extraOps.setUserName("metana username eka dapan");
+            //extraOps.setPassword(metana password eka dapan);
 
-            this.client = new MqttClient("tcp://192.168.1.4:1883", "AndroidThingSub", new MemoryPersistence());
+            this.client = new MqttClient("tcp://54.210.123.110", "AndroidThingSub", new MemoryPersistence());
             this.client.setCallback((MqttCallback) this);
-<<<<<<< HEAD
 
-            MqttConnectOptions authen = new MqttConnectOptions();
-           // authen.setUserName(userName);
-            //authen.setPassword(password.toCharArray());
-            authen.setKeepAliveInterval(30);
-            authen.setConnectionTimeout(10);
 
-            this.client.connect(authen);
-=======
             this.client.connect(extraOps);
             robotStat.setText(R.string.connectBroker);
             robotStat.setBackgroundResource(R.drawable.ic_connected);
             reconnect.setVisibility(View.INVISIBLE);
->>>>>>> 169614943585822efc1f9ea8ae73d7a9d7ebb2e0
             this.client.subscribe(this.topic);
 
             Log.d(TAG, "connectionLost");
