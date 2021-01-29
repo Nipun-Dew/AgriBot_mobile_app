@@ -131,7 +131,9 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             //extraOps.setUserName("metana username eka dapan");
             //extraOps.setPassword(metana password eka dapan);
 
-            this.client = new MqttClient("tcp://54.210.123.110", "AndroidThingSub", new MemoryPersistence());
+
+            this.client = new MqttClient("tcp://54.210.123.110:1883", "AndroidThingSub", new MemoryPersistence());
+
             this.client.setCallback((MqttCallback) this);
 
 
