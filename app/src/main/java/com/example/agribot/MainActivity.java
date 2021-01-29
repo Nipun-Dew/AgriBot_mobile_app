@@ -38,8 +38,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     private final String topic = "test1";
     private MqttClient client;
     private FirebaseDatabase firebaseDatabase;
-    private TextView robotStat;
-    private Button reconnect;
+    private TextView deviceStat;
 
     public void publishStartSignalToBroker(View view) {
         try {
@@ -125,12 +124,9 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             extraOps.setConnectionTimeout(3);
             extraOps.setAutomaticReconnect(true);
 
-            this.client = new MqttClient("tcp://54.210.123.110:1883", "AndroidThingSub", new MemoryPersistence());
+            this.client = new MqttClient("tcp://54.237.80.79:1883", "AndroidThingSub", new MemoryPersistence());
             this.client.setCallback((MqttCallback) this);
             this.client.connect(extraOps);
-            robotStat.setText(R.string.connectBroker);
-            robotStat.setBackgroundResource(R.drawable.ic_connected);
-            reconnect.setVisibility(View.INVISIBLE);
             this.client.subscribe(this.topic);
 
             Log.d(TAG, "connectionLost");
@@ -171,14 +167,8 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        robotStat = findViewById(R.id.textViewBrokerStat);
-        reconnect = findViewById(R.id.buttonReconnect);
-        reconnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                subscribeToBroker();
-            }
-        });
+        TextView device = findViewById(R.id.textViewDevice);
+        deviceStat = findViewById(R.id.textViewDeviceStat);
         //robotStat.setText(R.string.notConnect);
         //robotStat.setBackgroundResource(R.);
 
@@ -214,15 +204,18 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
 
     @Override
     public void connectionLost(Throwable cause) {
-        robotStat.setText(R.string.notConnect);
-        robotStat.setBackgroundResource(R.drawable.ic_disconnected);
         Toast.makeText(MainActivity.this, "Connection Lost!!!", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "connectionLost");
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
     public void messageArrived(String topic, MqttMessage message) throws Exception {
         String payload = new String(message.getPayload());
+        if (payload.equals("connected")) {
+            deviceStat.setText("Connected");
+            deviceStat.setBackgroundResource(R.drawable.ic_connected);
+        }
         TextView publishedData = findViewById(R.id.textViewMsg);
         publishedData.setText(payload);
         Log.d(TAG, payload);
