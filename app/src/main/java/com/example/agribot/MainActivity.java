@@ -3,12 +3,14 @@ package com.example.agribot;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AppCompatActivity;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -36,6 +38,8 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     private final String topic = "test1";
     private MqttClient client;
     private FirebaseDatabase firebaseDatabase;
+    private TextView robotStat;
+    private Button reconnect;
 
     public void publishStartSignalToBroker(View view) {
         try {
@@ -118,10 +122,16 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         }
     }
 
+    @SuppressLint("WrongConstant")
     private void subscribeToBroker() {
         try {
+            MqttConnectOptions extraOps = new MqttConnectOptions();
+            extraOps.setConnectionTimeout(3);
+            extraOps.setAutomaticReconnect(true);
+
             this.client = new MqttClient("tcp://192.168.1.4:1883", "AndroidThingSub", new MemoryPersistence());
             this.client.setCallback((MqttCallback) this);
+<<<<<<< HEAD
 
             MqttConnectOptions authen = new MqttConnectOptions();
            // authen.setUserName(userName);
@@ -130,10 +140,24 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             authen.setConnectionTimeout(10);
 
             this.client.connect(authen);
+=======
+            this.client.connect(extraOps);
+            robotStat.setText(R.string.connectBroker);
+            robotStat.setBackgroundResource(R.drawable.ic_connected);
+            reconnect.setVisibility(View.INVISIBLE);
+>>>>>>> 169614943585822efc1f9ea8ae73d7a9d7ebb2e0
             this.client.subscribe(this.topic);
+
             Log.d(TAG, "connectionLost");
+
         } catch (MqttException e) {
             e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "Connection Timeout!!!", Toast.LENGTH_SHORT).show();
+            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+            finish();
+            //robotStat.setText(R.string.notConnect);
+            //robotStat.setBackgroundResource(R.drawable.ic_disconnected);
+            //Toast.makeText(MainActivity.this, "Connection Timeout!!!", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -162,6 +186,17 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
+        robotStat = findViewById(R.id.textViewBrokerStat);
+        reconnect = findViewById(R.id.buttonReconnect);
+        reconnect.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                subscribeToBroker();
+            }
+        });
+        //robotStat.setText(R.string.notConnect);
+        //robotStat.setBackgroundResource(R.);
+
         getProductID();
 
         subscribeToBroker();
@@ -177,14 +212,16 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
             case R.id.logoutMenu: {
-                finish();
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
+                break;
             }
             case R.id.settingsMenu: {
-
+                break;
             }
             case R.id.deviceInfo: {
                 startActivity(new Intent(MainActivity.this, DeviceInfoActivity.class));
+                break;
             }
         }
         return super.onOptionsItemSelected(item);
@@ -192,6 +229,9 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
 
     @Override
     public void connectionLost(Throwable cause) {
+        robotStat.setText(R.string.notConnect);
+        robotStat.setBackgroundResource(R.drawable.ic_disconnected);
+        Toast.makeText(MainActivity.this, "Connection Lost!!!", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "connectionLost");
     }
 

@@ -114,6 +114,7 @@ public class LoginActivity extends AppCompatActivity {
                         finish();
                         loginID = product_ID;
                         startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        finish();
                     } else {
                         userProductId.setText("");
                         userPassword.setText("");

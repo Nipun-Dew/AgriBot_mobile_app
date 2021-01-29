@@ -35,4 +35,7 @@
     <string name="imei">IMEI</string>
     <string name="close">Close</string>
     <string name="versionData">AgriBot version 1.0.0</string>
+    <string name="notConnect">Not Connected</string>
+    <string name="connectBroker">Connected to broker</string>
+    <string name="connect">CONNECT</string>
 </resources>
