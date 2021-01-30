@@ -1,8 +1,8 @@
 package com.example.agribot;
 
-public class ValidateMapData {
+class ValidateMapData {
 
-    public static boolean validate(String rowLen, String seedGap, String rowNo, String rowGap) {
+    static boolean validate(String rowLen, String seedGap, String rowNo, String rowGap) {
 
         int rowLenInt = Integer.parseInt(rowLen);
         int seedGapInt = Integer.parseInt(seedGap);
@@ -29,7 +29,7 @@ public class ValidateMapData {
         return true;
     }
 
-    public static boolean isDataEmpty(String rowLen, String seedGap, String rowNo, String rowGap) {
+    static boolean isDataEmpty(String rowLen, String seedGap, String rowNo, String rowGap) {
 
         if (rowLen.equals("") || seedGap.equals("") || rowNo.equals("") || rowGap.equals("")) {
             return true;

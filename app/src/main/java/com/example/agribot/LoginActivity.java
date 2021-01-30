@@ -50,52 +50,6 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public static class User {
-
-        public String password;
-        public String imei;
-        public String owner;
-        public String chipset;
-        public String date;
-        public String topic;
-
-        public User() {
-        }
-
-        public User(String password, String imei, String owner, String chipset, String date, String topic) {
-            this.password = password;
-            this.chipset = chipset;
-            this.imei = imei;
-            this.owner = owner;
-            this.date = date;
-            this.topic = topic;
-        }
-
-        public String getPassword() {
-            return password;
-        }
-
-        public String getChipset() {
-            return chipset;
-        }
-
-        public String getImei() {
-            return imei;
-        }
-
-        public String getOwner() {
-            return owner;
-        }
-
-        public String getTopic() {
-            return topic;
-        }
-
-        public String getDate() {
-            return date;
-        }
-
-    }
 
     private void validate(final String product_ID, final String user_password) {
 

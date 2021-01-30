@@ -40,7 +40,6 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     private static final String TAG = "MyActivity";
     String topic = userTopic;
     private MqttClient client;
-    private FirebaseDatabase firebaseDatabase;
     private TextView deviceStat;
 
     public void publishStartSignalToBroker(View view) {
@@ -135,7 +134,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             String subscriberTopic = topic + "/#";
             MqttTopic.validate(this.topic, true);
 
-            this.client = new MqttClient("tcp://54.237.80.79:1883", "AndroidThingSub", new MemoryPersistence());
+            this.client = new MqttClient("tcp://192.168.1.4:1883", "AndroidThingSub", new MemoryPersistence());
             this.client.setCallback((MqttCallback) this);
             this.client.connect(extraOps);
             this.client.subscribe(subscriberTopic);
@@ -147,20 +146,17 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             Toast.makeText(getApplicationContext(), "Connection Timeout!!!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
-            //robotStat.setText(R.string.notConnect);
-            //robotStat.setBackgroundResource(R.drawable.ic_disconnected);
-            //Toast.makeText(MainActivity.this, "Connection Timeout!!!", Toast.LENGTH_SHORT).show();
         }
     }
 
     private void getProductID() {
 
-        firebaseDatabase = FirebaseDatabase.getInstance();
+        FirebaseDatabase firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myRef = firebaseDatabase.getReference(Objects.requireNonNull(LoginActivity.loginID));
         myRef.addValueEventListener(new ValueEventListener() {
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                LoginActivity.User user = snapshot.getValue(LoginActivity.User.class);
+                User user = snapshot.getValue(User.class);
                 assert user != null;
             }
 
@@ -219,9 +215,13 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     @Override
     public void messageArrived(String inputTopic, MqttMessage message) throws Exception {
         String payload = new String(message.getPayload());
-        if (inputTopic.equals(topic + "/State")) {
+        if (inputTopic.equals(topic + "/State") && payload.equals("connect")) {
             deviceStat.setText("connected");
             deviceStat.setBackgroundResource(R.drawable.ic_connected);
+        }
+        if (inputTopic.equals(topic + "/State") && payload.equals("disconnect")) {
+            deviceStat.setText("disconnect");
+            deviceStat.setBackgroundResource(R.drawable.ic_disconnected);
         }
         if (inputTopic.equals(topic + "/Sensor/Temperature")) {
             TextView tempData = findViewById(R.id.textViewTempVal);
@@ -229,6 +229,11 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             Log.d(TAG, payload);
         }
         if (inputTopic.equals(topic + "/Sensor/Humidity")) {
+            TextView humidData = findViewById(R.id.textViewHumVal);
+            humidData.setText(payload);
+            Log.d(TAG, payload);
+        }
+        if (inputTopic.equals(topic + "/willtest")) {
             TextView humidData = findViewById(R.id.textViewHumVal);
             humidData.setText(payload);
             Log.d(TAG, payload);

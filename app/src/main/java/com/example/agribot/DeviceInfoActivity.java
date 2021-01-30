@@ -44,7 +44,7 @@ public class DeviceInfoActivity extends AppCompatActivity {
             @SuppressLint("SetTextI18n")
             @Override
             public void onDataChange(@NonNull DataSnapshot snapshot) {
-                LoginActivity.User user = snapshot.getValue(LoginActivity.User.class);
+                User user = snapshot.getValue(User.class);
                 assert user != null;
                 versionData.setText(R.string.versionData);
                 chipsetData.setText(user.getChipset());
@@ -68,7 +68,7 @@ public class DeviceInfoActivity extends AppCompatActivity {
         findViewById(R.id.textViewPasswrd);
         findViewById(R.id.textViewOwn);
         findViewById(R.id.textViewIM);
-        Button close = (Button) findViewById(R.id.closeInfo);
+        Button close = findViewById(R.id.closeInfo);
 
         versionData = findViewById(R.id.textViewVersionData);
         chipsetData = findViewById(R.id.textViewChipData);
