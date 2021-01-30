@@ -41,6 +41,8 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     String topic = userTopic;
     private MqttClient client;
     private TextView deviceStat;
+    public static String tempDataVar = "";
+    public static String humDataVar = "";
 
     public void publishStartSignalToBroker(View view) {
         try {
@@ -195,6 +197,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
                 break;
             }
             case R.id.settingsMenu: {
+                startActivity(new Intent(MainActivity.this, SensorDataActivity.class));
                 break;
             }
             case R.id.deviceInfo: {
@@ -226,11 +229,13 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         if (inputTopic.equals(topic + "/Sensor/Temperature")) {
             TextView tempData = findViewById(R.id.textViewTempVal);
             tempData.setText(payload);
+            tempDataVar = payload;
             Log.d(TAG, payload);
         }
         if (inputTopic.equals(topic + "/Sensor/Humidity")) {
             TextView humidData = findViewById(R.id.textViewHumVal);
             humidData.setText(payload);
+            humDataVar = payload;
             Log.d(TAG, payload);
         }
         if (inputTopic.equals(topic + "/willtest")) {

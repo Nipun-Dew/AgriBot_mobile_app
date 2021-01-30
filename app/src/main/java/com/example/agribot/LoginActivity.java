@@ -86,6 +86,9 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onCancelled(@NonNull DatabaseError error) {
                 System.out.println(error.getCode());
+                userProductId.setText("");
+                userPassword.setText("");
+                Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();
             }
         });
     }

@@ -10,20 +10,21 @@
         android:id="@+id/textView_login"
         android:layout_width="205dp"
         android:layout_height="58dp"
+        android:layout_marginTop="56dp"
         android:fontFamily="@font/archivo_black"
         android:text="@string/user_login"
         android:textSize="30sp"
-        app:layout_constraintBottom_toBottomOf="parent"
+        android:textAlignment="center"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintHorizontal_bias="0.456"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
+        app:layout_constraintTop_toTopOf="parent" />
 
     <EditText
         android:id="@+id/editTextLoginMail"
         android:layout_width="312dp"
         android:layout_height="47dp"
+        android:layout_marginTop="80dp"
         android:background="@drawable/input_box"
         android:drawableStart="@drawable/product_icon"
         android:drawablePadding="12dp"
@@ -32,31 +33,29 @@
         android:inputType="textPersonName"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.429"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.351" />
+        app:layout_constraintEnd_toEndOf="@+id/textView_login"
+        app:layout_constraintHorizontal_bias="0.42"
+        app:layout_constraintStart_toStartOf="@+id/textView_login"
+        app:layout_constraintTop_toBottomOf="@+id/textView_login" />
 
     <EditText
         android:id="@+id/editTextLoginPasswrd"
         android:layout_width="316dp"
         android:layout_height="53dp"
+        android:background="@drawable/input_box"
+        android:drawableStart="@drawable/password_icon"
+        android:drawablePadding="12dp"
         android:ems="10"
         android:hint="@string/enter_password"
         android:inputType="textPassword"
-        android:background="@drawable/input_box"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
-        android:drawableStart="@drawable/password_icon"
-        android:drawablePadding="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.452"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.554" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextLoginMail"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/editTextLoginMail"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProdID"
+        app:layout_constraintVertical_bias="0.109" />
 
     <Button
         android:id="@+id/Loginbutton"
@@ -65,34 +64,31 @@
         android:background="@drawable/custom_default_btn"
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.783" />
+        app:layout_constraintEnd_toEndOf="@+id/editTextLoginPasswrd"
+        app:layout_constraintStart_toStartOf="@+id/editTextLoginPasswrd"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProdPassword"
+        app:layout_constraintVertical_bias="0.347" />
 
     <TextView
         android:id="@+id/textViewProdID"
         android:layout_width="328dp"
         android:layout_height="22dp"
+        android:layout_marginStart="8dp"
         android:text="@string/product_id_is_in_the_product_details"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.658"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.441" />
+        app:layout_constraintStart_toStartOf="@+id/editTextLoginMail"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginMail"
+        app:layout_constraintVertical_bias="0.03" />
 
     <TextView
         android:id="@+id/textViewProdPassword"
         android:layout_width="240dp"
         android:layout_height="18dp"
+        android:layout_marginStart="8dp"
         android:text="password is in the product details"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.315"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.634" />
+        app:layout_constraintStart_toStartOf="@+id/editTextLoginPasswrd"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginPasswrd"
+        app:layout_constraintVertical_bias="0.055" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>
