@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android">
+    xmlns:app="http://schemas.android.com/apk/res-auto">
+    <item
+        android:id="@+id/nav_config"
+        android:icon="@drawable/ic_baseline_miscellaneous_services_24"
+        android:title="Configuration" />
+    <item
+        android:id="@+id/nav_sensor_data"
+        android:icon="@drawable/ic_baseline_download_24"
+        android:title="Sensor Data" />
+    <item
+        android:id="@+id/nav_logout"
+        android:icon="@drawable/ic_baseline_logout"
+        android:title="Logout" />
+</menu>

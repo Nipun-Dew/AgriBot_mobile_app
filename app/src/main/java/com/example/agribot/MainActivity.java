@@ -24,28 +24,37 @@ import com.google.firebase.database.ValueEventListener;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
+import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
 import org.eclipse.paho.client.mqttv3.MqttMessage;
+import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity implements MqttCallback {
+import static com.example.agribot.LoginActivity.userTopic;
+
+public class MainActivity extends AppCompatActivity implements MqttCallbackExtended {
 
     private static final String TAG = "MyActivity";
-    private final String topic = "test1";
+    String topic = userTopic;
     private MqttClient client;
     private FirebaseDatabase firebaseDatabase;
-    private TextView robotStat;
-    private Button reconnect;
+    private TextView deviceStat;
 
+    private String publishTopic = topic + "/Data";
+    
     public void publishStartSignalToBroker(View view) {
         try {
             MqttMessage msg = new MqttMessage("start".getBytes());
-            msg.setQos(1);
-            this.client.publish(this.topic, msg);
+            msg.setQos(2);
+            if(this.client.isConnected()) {
+                this.client.publish(publishTopic, msg);
+            }else{
+                Log.d(TAG, "connectionLost");
+            }
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -55,7 +64,11 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         try {
             MqttMessage msg = new MqttMessage("pause".getBytes());
             msg.setQos(2);
-            this.client.publish(this.topic, msg);
+            if(this.client.isConnected()) {
+                this.client.publish(publishTopic, msg);
+            }else{
+                Log.d(TAG, "connectionLost");
+            }
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -66,7 +79,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             MqttMessage msg = new MqttMessage("stop".getBytes());
             msg.setQos(2);
             if(this.client.isConnected()) {
-                this.client.publish(this.topic, msg);
+                this.client.publish(publishTopic, msg);
             }else{
                 Log.d(TAG, "connectionLost");
             }
@@ -79,7 +92,11 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
         try {
             MqttMessage msg = new MqttMessage("reset".getBytes());
             msg.setQos(2);
-            this.client.publish(this.topic, msg);
+            if(this.client.isConnected()) {
+                this.client.publish(publishTopic, msg);
+            }else{
+                Log.d(TAG, "connectionLost");
+            }
         } catch (MqttException e) {
             e.printStackTrace();
         }
@@ -93,10 +110,10 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     }
 
     public void publishMapDataToBroker(View view) {
-        EditText text1 = findViewById(R.id.editText1);
-        EditText text2 = findViewById(R.id.editText2);
-        EditText text3 = findViewById(R.id.editText3);
-        EditText text4 = findViewById(R.id.editText4);
+        EditText text1 = findViewById(R.id.editText5);
+        EditText text2 = findViewById(R.id.editText8);
+        EditText text3 = findViewById(R.id.editText6);
+        EditText text4 = findViewById(R.id.editText7);
 
         String rowLength = text1.getText().toString();
         String seedGap = text2.getText().toString();
@@ -111,7 +128,11 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             try {
                 MqttMessage msg = new MqttMessage(mapData.getBytes());
                 msg.setQos(2);
-                this.client.publish(this.topic, msg);
+                if(this.client.isConnected()) {
+                    this.client.publish(publishTopic, msg);
+                }else{
+                    Log.d(TAG, "connectionLost");
+                }
             } catch (MqttException e) {
                 e.printStackTrace();
             }
@@ -125,22 +146,21 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     @SuppressLint("WrongConstant")
     private void subscribeToBroker() {
         try {
-            this.client = new MqttClient("tcp://54.237.80.79:1883", "AndroidThingSub", new MemoryPersistence());
-            this.client.setCallback((MqttCallback) this);
+            this.client = new MqttClient("tcp://52.201.221.111:1883", "user1", new MemoryPersistence());
+            this.client.setCallback((MqttCallbackExtended)this);
 
             MqttConnectOptions extraOps = new MqttConnectOptions();
-            extraOps.setConnectionTimeout(3);
+            extraOps.setConnectionTimeout(30);
             extraOps.setAutomaticReconnect(true);
             extraOps.setKeepAliveInterval(15);
             //extraOps.setUserName("metana username eka dapan");
             //extraOps.setPassword(metana password eka dapan);
-            extraOps.setCleanSession(false);
+            extraOps.setCleanSession(true);
 
+            String subscriberTopics = topic + "/#";
+            MqttTopic.validate(this.topic, true);
             this.client.connect(extraOps);
-            robotStat.setText(R.string.connectBroker);
-            robotStat.setBackgroundResource(R.drawable.ic_connected);
-            reconnect.setVisibility(View.INVISIBLE);
-            this.client.subscribe(this.topic);
+            this.client.subscribe(subscriberTopics);
 
             Log.d(TAG, "connectionLost");
 
@@ -154,7 +174,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             //Toast.makeText(MainActivity.this, "Connection Timeout!!!", Toast.LENGTH_SHORT).show();
         }
     }
-
+    /*
     private void getProductID() {
 
         firebaseDatabase = FirebaseDatabase.getInstance();
@@ -173,25 +193,17 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
 
             }
         });
-    }
+    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        robotStat = findViewById(R.id.textViewBrokerStat);
-        reconnect = findViewById(R.id.buttonReconnect);
-        reconnect.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                subscribeToBroker();
-            }
-        });
-        //robotStat.setText(R.string.notConnect);
-        //robotStat.setBackgroundResource(R.);
+        TextView device = findViewById(R.id.textViewDevice);
+        deviceStat = findViewById(R.id.textViewDeviceStat);
 
-        getProductID();
+       // getProductID();
 
         subscribeToBroker();
     }
@@ -223,22 +235,51 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
 
     @Override
     public void connectionLost(Throwable cause) {
-        robotStat.setText(R.string.notConnect);
-        robotStat.setBackgroundResource(R.drawable.ic_disconnected);
         Toast.makeText(MainActivity.this, "Connection Lost!!!", Toast.LENGTH_SHORT).show();
         Log.d(TAG, "connectionLost");
     }
 
+    @SuppressLint("SetTextI18n")
     @Override
-    public void messageArrived(String topic, MqttMessage message) throws Exception {
+    public void messageArrived(String inputTopic, MqttMessage message) throws Exception {
         String payload = new String(message.getPayload());
-        TextView publishedData = findViewById(R.id.textViewMsg);
-        publishedData.setText(payload);
-        Log.d(TAG, payload);
+        if (inputTopic.equals(topic + "/State")) {
+            deviceStat.setText("connected");
+            deviceStat.setBackgroundResource(R.drawable.ic_connected);
+        }
+        /*
+        if (inputTopic.equals(topic + "/Sensor/Temperature")) {
+            TextView publishedData = findViewById(R.id.textViewMsg);
+            publishedData.setText(payload);
+            Log.d(TAG, payload);
+        }
+        if (inputTopic.equals(topic + "/Sensor/Humidity")) {
+            TextView publishedData = findViewById(R.id.textViewMsg);
+            publishedData.setText(payload);
+            Log.d(TAG, payload);
+        }*/
+        //TextView publishedData = findViewById(R.id.textViewMsg);
+        //publishedData.setText(payload);
+        //Log.d(TAG, payload);
     }
 
     @Override
     public void deliveryComplete(IMqttDeliveryToken token) {
         Log.d(TAG, "deliveryComplete");
+    }
+
+    @Override
+    public void connectComplete(boolean reconnect, String serverURI) {
+        System.out.println("Re-Connection Attempt " + reconnect);
+        if(reconnect) {
+            try {
+                String subscriberTopics = topic + "/#";
+                MqttTopic.validate(this.topic, true);
+                this.client.subscribe(subscriberTopics);
+            } catch (MqttException e) {
+                // TODO Auto-generated catch block
+                e.printStackTrace();
+            }
+        }
     }
 }
