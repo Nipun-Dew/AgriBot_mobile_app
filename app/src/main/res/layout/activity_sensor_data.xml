@@ -7,26 +7,59 @@
     tools:context=".SensorDataActivity">
 
     <TextView
-        android:id="@+id/textViewTempShow"
-        android:layout_width="106dp"
-        android:layout_height="40dp"
-        android:text="TextView"
-        android:textSize="18dp"
+        android:id="@+id/textViewHumShow"
+        android:layout_width="145dp"
+        android:layout_height="79dp"
+        android:background="@drawable/ic_sensor"
+        android:drawableStart="@drawable/ic_water_drop_svgrepo_com"
+        android:drawablePadding="10dp"
+        android:paddingVertical="19dp"
+        android:paddingStart="18dp"
+        android:paddingTop="6dp"
+        android:text="89%"
+        android:textSize="28dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.176"
+        app:layout_constraintHorizontal_bias="0.135"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.108" />
 
     <TextView
-        android:id="@+id/textViewHumShow"
-        android:layout_width="95dp"
-        android:layout_height="36dp"
-        android:text="TextView"
-        android:textSize="18dp"
+        android:id="@+id/textViewTempShow"
+        android:layout_width="146dp"
+        android:layout_height="77dp"
+        android:background="@drawable/ic_sensor"
+        android:drawableStart="@drawable/ic_temp"
+        android:drawablePadding="10dp"
+        android:paddingVertical="19dp"
+        android:paddingStart="18dp"
+        android:paddingTop="6dp"
+        android:text="26 C"
+        android:textSize="24dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.69"
+        app:layout_constraintHorizontal_bias="0.875"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.112" />
+
+    <TextView
+        android:id="@+id/textViewLightShow"
+        android:layout_width="150dp"
+        android:layout_height="80dp"
+        android:background="@drawable/ic_sensor"
+        android:drawableStart="@drawable/ic_sun"
+        android:drawablePadding="14dp"
+        android:paddingVertical="19dp"
+        android:paddingStart="24dp"
+        android:paddingTop="6dp"
+        android:text="12 w"
+        android:textSize="24dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.137"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.374" />
 </androidx.constraintlayout.widget.ConstraintLayout>
