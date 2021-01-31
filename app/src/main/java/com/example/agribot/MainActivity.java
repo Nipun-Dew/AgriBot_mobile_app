@@ -136,7 +136,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             String subscriberTopic = topic + "/#";
             MqttTopic.validate(this.topic, true);
 
-            this.client = new MqttClient("tcp://192.168.1.4:1883", "AndroidThingSub", new MemoryPersistence());
+            this.client = new MqttClient("tcp://52.201.221.111:1883", "AndroidThingSub", new MemoryPersistence());
             this.client.setCallback((MqttCallback) this);
             this.client.connect(extraOps);
             this.client.subscribe(subscriberTopic);

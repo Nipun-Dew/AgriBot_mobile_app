@@ -8,8 +8,8 @@
 
     <TextView
         android:id="@+id/textViewHumShow"
-        android:layout_width="145dp"
-        android:layout_height="79dp"
+        android:layout_width="154dp"
+        android:layout_height="78dp"
         android:background="@drawable/ic_sensor"
         android:drawableStart="@drawable/ic_water_drop_svgrepo_com"
         android:drawablePadding="10dp"
@@ -50,9 +50,9 @@
         android:layout_height="80dp"
         android:background="@drawable/ic_sensor"
         android:drawableStart="@drawable/ic_sun"
-        android:drawablePadding="14dp"
-        android:paddingVertical="19dp"
-        android:paddingStart="24dp"
+        android:drawablePadding="10dp"
+        android:paddingVertical="22dp"
+        android:paddingStart="18dp"
         android:paddingTop="6dp"
         android:text="12 w"
         android:textSize="24dp"
