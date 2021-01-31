@@ -1,8 +1,5 @@
 package com.example.agribot;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.annotation.SuppressLint;
 import android.content.Intent;
 import android.os.Bundle;
@@ -10,21 +7,19 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DataSnapshot;
-import com.google.firebase.database.DatabaseError;
-import com.google.firebase.database.DatabaseReference;
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.fragment.app.Fragment;
+
+import com.google.android.material.bottomnavigation.BottomNavigationView;
 import com.google.firebase.database.FirebaseDatabase;
-import com.google.firebase.database.ValueEventListener;
 
 import org.eclipse.paho.client.mqttv3.IMqttDeliveryToken;
 import org.eclipse.paho.client.mqttv3.MqttCallback;
-import org.eclipse.paho.client.mqttv3.MqttCallbackExtended;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttConnectOptions;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -32,11 +27,9 @@ import org.eclipse.paho.client.mqttv3.MqttMessage;
 import org.eclipse.paho.client.mqttv3.MqttTopic;
 import org.eclipse.paho.client.mqttv3.persist.MemoryPersistence;
 
-import java.util.Objects;
-
 import static com.example.agribot.LoginActivity.userTopic;
 
-public class MainActivity extends AppCompatActivity implements MqttCallbackExtended {
+public class MainActivity extends AppCompatActivity implements MqttCallback {
 
     private static final String TAG = "MyActivity";
     String topic = userTopic;
@@ -147,7 +140,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
     private void subscribeToBroker() {
         try {
             this.client = new MqttClient("tcp://52.201.221.111:1883", "user1", new MemoryPersistence());
-            this.client.setCallback((MqttCallbackExtended)this);
+            this.client.setCallback((MqttCallback)this);
 
             MqttConnectOptions extraOps = new MqttConnectOptions();
             extraOps.setConnectionTimeout(30);
@@ -203,10 +196,40 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
         TextView device = findViewById(R.id.textViewDevice);
         deviceStat = findViewById(R.id.textViewDeviceStat);
 
-       // getProductID();
-
+        // getProductID();
         subscribeToBroker();
+
+        BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
+        bottomNav.setOnNavigationItemSelectedListener(navListener);
+        //I added this if statement to keep the selected fragment when rotating the device
+        if (savedInstanceState == null) {
+            getSupportFragmentManager().beginTransaction().replace(R.id.relativeLayout,
+                    new Fragment_Configuration()).commit();
+        }
+
     }
+    private BottomNavigationView.OnNavigationItemSelectedListener navListener =
+            new BottomNavigationView.OnNavigationItemSelectedListener() {
+                @Override
+                public boolean onNavigationItemSelected(@NonNull MenuItem item) {
+                    Fragment selectedFragment = null;
+                    switch (item.getItemId()) {
+                        case R.id.nav_config:
+                            selectedFragment = new Fragment_Configuration();
+                            break;
+                        case R.id.nav_sensor_data:
+                            selectedFragment = new Fragment_SensorData();
+                            break;
+                        case R.id.nav_logout:
+                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                            finish();
+                            break;
+                    }
+                    getSupportFragmentManager().beginTransaction().replace(R.id.relativeLayout,
+                            selectedFragment).commit();
+                    return true;
+                }
+            };
 
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
@@ -247,17 +270,17 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
             deviceStat.setText("connected");
             deviceStat.setBackgroundResource(R.drawable.ic_connected);
         }
-        /*
+
         if (inputTopic.equals(topic + "/Sensor/Temperature")) {
-            TextView publishedData = findViewById(R.id.textViewMsg);
+            TextView publishedData = findViewById(R.id.txtTemperature);
             publishedData.setText(payload);
             Log.d(TAG, payload);
         }
         if (inputTopic.equals(topic + "/Sensor/Humidity")) {
-            TextView publishedData = findViewById(R.id.textViewMsg);
+            TextView publishedData = findViewById(R.id.txtHumadity);
             publishedData.setText(payload);
             Log.d(TAG, payload);
-        }*/
+        }
         //TextView publishedData = findViewById(R.id.textViewMsg);
         //publishedData.setText(payload);
         //Log.d(TAG, payload);
@@ -267,7 +290,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
     public void deliveryComplete(IMqttDeliveryToken token) {
         Log.d(TAG, "deliveryComplete");
     }
-
+    /*
     @Override
     public void connectComplete(boolean reconnect, String serverURI) {
         System.out.println("Re-Connection Attempt " + reconnect);
@@ -281,5 +304,5 @@ public class MainActivity extends AppCompatActivity implements MqttCallbackExten
                 e.printStackTrace();
             }
         }
-    }
+    }*/
 }
