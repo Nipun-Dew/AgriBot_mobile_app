@@ -1,17 +1,17 @@
 package com.example.agribot;
 
-import androidx.annotation.NonNull;
-import androidx.appcompat.app.AppCompatActivity;
-
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.NumberPicker;
 import android.widget.TextView;
 import android.widget.Toast;
+
+import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
 
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -31,6 +31,7 @@ public class LoginActivity extends AppCompatActivity {
 
     public static String loginID;
     public static String userTopic;
+    Toast toast;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -40,13 +41,18 @@ public class LoginActivity extends AppCompatActivity {
 
         progressDialog = new ProgressDialog(this);
 
+        toast = Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT);
+        toast.setGravity(Gravity.TOP,0,250);
+
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 String user_id = userProductId.getText().toString().trim();
                 String user_password = userPassword.getText().toString().trim();
                 if (user_id.isEmpty() || user_password.isEmpty()) {
-                    Toast.makeText(LoginActivity.this, "Please fill all the fields!", Toast.LENGTH_SHORT).show();
+                   Toast toast1 = Toast.makeText(LoginActivity.this, "Please fill all the fields!", Toast.LENGTH_SHORT);
+                    toast1.setGravity(Gravity.TOP,0,250);
+                    toast1.show();
                 } else {
                     validate(user_id, user_password);
                 }
@@ -124,12 +130,12 @@ public class LoginActivity extends AppCompatActivity {
                     } else {
                         userProductId.setText("");
                         userPassword.setText("");
-                        Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();
+                        toast.show();
                     }
                 } else {
                     userProductId.setText("");
                     userPassword.setText("");
-                    Toast.makeText(LoginActivity.this, "Login Failed!", Toast.LENGTH_SHORT).show();
+                    toast.show();
                 }
             }
 

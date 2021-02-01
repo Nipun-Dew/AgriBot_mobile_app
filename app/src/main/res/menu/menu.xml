@@ -3,12 +3,6 @@
     xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <item
-        android:id="@+id/logoutMenu"
-        android:orderInCategory="100"
-        app:showAsAction="never"
-        android:title="@string/logout" />
-
-    <item
         android:id="@+id/settingsMenu"
         android:orderInCategory="200"
         app:showAsAction="never"
@@ -16,8 +10,12 @@
 
     <item
         android:id="@+id/deviceInfo"
-        android:orderInCategory="300"
+        android:orderInCategory="100"
         app:showAsAction="never"
         android:title="@string/device_info" />
-
+    <item
+        android:id="@+id/logoutMenu"
+        android:orderInCategory="300"
+        app:showAsAction="never"
+        android:title="@string/logout" />
 </menu>

@@ -1,6 +1,7 @@
 package com.example.agribot;
 
 import android.annotation.SuppressLint;
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.util.Log;
@@ -12,6 +13,7 @@ import android.widget.TextView;
 import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
@@ -46,14 +48,14 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             msg.setQos(2);
             if (this.client.isConnected()) {
                 this.client.publish(publishTopic, msg);
-                Toast.makeText(getApplicationContext(), "start signal sent", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Start signal sent", Toast.LENGTH_SHORT).show();
             } else {
-                Log.d(TAG, "connection Lost");
-                Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Connection Lost");
+                Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
             }
         } catch (MqttException e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -63,48 +65,96 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             msg.setQos(2);
             if (this.client.isConnected()) {
                 this.client.publish(publishTopic, msg);
-                Toast.makeText(getApplicationContext(), "pause signal sent", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Pause signal sent", Toast.LENGTH_SHORT).show();
             } else {
-                Log.d(TAG, "connection Lost");
-                Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
+                Log.d(TAG, "Connection Lost");
+                Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
             }
         } catch (MqttException e) {
             e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
+            Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void publishStopSignalToBroker(View view) {
-        try {
-            MqttMessage msg = new MqttMessage("stop".getBytes());
-            msg.setQos(2);
-            if (this.client.isConnected()) {
-                this.client.publish(publishTopic, msg);
-                Toast.makeText(getApplicationContext(), "stop signal sent", Toast.LENGTH_SHORT).show();
-            } else {
-                Log.d(TAG, "connection Lost");
-                Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
-            }
-        } catch (MqttException e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
+        if (this.client.isConnected()) {
+            // Build an AlertDialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            // Set a title for alert dialog
+            builder.setTitle("STOP SIGNAL!");
+            // Ask the final question
+            builder.setMessage("Are you sure to stop the process?");
+            // Set the alert dialog yes button click listener
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    MqttMessage msg = new MqttMessage("stop".getBytes());
+                    msg.setQos(2);
+                    try {
+                        client.publish(publishTopic, msg);
+                        Toast.makeText(getApplicationContext(), "Stop signal sent", Toast.LENGTH_SHORT).show();
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            // Set the alert dialog no button click listener
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Do something when No button clicked
+                    Toast.makeText(getApplicationContext(),
+                            "No Button Clicked",Toast.LENGTH_SHORT).show();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            // Display the alert dialog on interface
+            dialog.show();
+        } else {
+            Log.d(TAG, "Connection Lost");
+            Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
         }
     }
 
     public void publishResetSignalToBroker(View view) {
-        try {
-            MqttMessage msg = new MqttMessage("reset".getBytes());
-            msg.setQos(2);
-            if (this.client.isConnected()) {
-                this.client.publish(publishTopic, msg);
-                Toast.makeText(getApplicationContext(), "reset signal sent", Toast.LENGTH_SHORT).show();
-            } else {
-                Log.d(TAG, "connection Lost");
-                Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
-            }
-        } catch (MqttException e) {
-            e.printStackTrace();
-            Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
+        if (this.client.isConnected()) {
+            // Build an AlertDialog
+            AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+            // Set a title for alert dialog
+            builder.setTitle("RESET SIGNAL!");
+            // Ask the final question
+            builder.setMessage("Are you sure to reset data?");
+            // Set the alert dialog yes button click listener
+            builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    MqttMessage msg = new MqttMessage("reset".getBytes());
+                    msg.setQos(2);
+                    try {
+                        client.publish(publishTopic, msg);
+                        Toast.makeText(getApplicationContext(), "Reset signal sent", Toast.LENGTH_SHORT).show();
+                    } catch (MqttException e) {
+                        e.printStackTrace();
+                        Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
+                    }
+                }
+            });
+            // Set the alert dialog no button click listener
+            builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    // Do something when No button clicked
+                    Toast.makeText(getApplicationContext(),
+                            "No Button Clicked",Toast.LENGTH_SHORT).show();
+                }
+            });
+            AlertDialog dialog = builder.create();
+            // Display the alert dialog on interface
+            dialog.show();
+        } else {
+            Log.d(TAG, "Connection Lost");
+            Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -136,14 +186,14 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
                 msg.setQos(2);
                 if (this.client.isConnected()) {
                     this.client.publish(publishTopic, msg);
-                    Toast.makeText(getApplicationContext(), "data published!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getApplicationContext(), "Data Sent!", Toast.LENGTH_SHORT).show();
                 } else {
-                    Log.d(TAG, "connection Lost");
-                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                    Log.d(TAG, "Connection Lost");
+                    Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
                 }
             } catch (MqttException e) {
                 e.printStackTrace();
-                Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
+                Toast.makeText(getApplicationContext(), "Connection Failed", Toast.LENGTH_SHORT).show();
             }
             clearFields(text1, text2, text3, text4);
         } else {
@@ -158,7 +208,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             MqttConnectOptions extraOps = new MqttConnectOptions();
             extraOps.setConnectionTimeout(30);
             extraOps.setAutomaticReconnect(true);
-            // extraOps.setKeepAliveInterval(15);
+            extraOps.setKeepAliveInterval(15);
             //extraOps.setUserName("metana username eka dapan");
             //extraOps.setPassword(metana password eka dapan);
             extraOps.setCleanSession(true);
@@ -174,30 +224,28 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             this.client.connect(extraOps);
             this.client.subscribe(subscriberTopics);
 
-            Log.d(TAG, "connectionLost");
-            Toast.makeText(getApplicationContext(), "Connection Lost", Toast.LENGTH_SHORT).show();
+            Log.d(TAG, "Connected to Server");
+            Toast.makeText(getApplicationContext(), "Connected to Server", Toast.LENGTH_SHORT).show();
+
         } catch (MqttException e) {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), "Connection Timeout!!!", Toast.LENGTH_SHORT).show();
             startActivity(new Intent(MainActivity.this, LoginActivity.class));
             finish();
-            //robotStat.setText(R.string.notConnect);
-            //robotStat.setBackgroundResource(R.drawable.ic_disconnected);
-            //Toast.makeText(MainActivity.this, "Connection Timeout!!!", Toast.LENGTH_SHORT).show();
+
         }
     }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+
+        subscribeToBroker();
+
         setContentView(R.layout.activity_main);
 
         deviceStat = findViewById(R.id.textViewDeviceStat);
         temp = findViewById(R.id.txtTemperature);
-
-        //getProductID();
-
-        subscribeToBroker();
 
         BottomNavigationView bottomNav = findViewById(R.id.bottom_navigation);
         bottomNav.setOnNavigationItemSelectedListener(navListener);
@@ -217,21 +265,50 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
                     switch (item.getItemId()) {
                         case R.id.nav_config:
                             selectedFragment = new Fragment_Configuration();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.mainLayout,
+                                    selectedFragment).commit();
                             break;
                         case R.id.nav_sensor_data:
-                            Bundle data = new Bundle();//create bundle instance
-                            data.putString("temperature", tempDataVar);//put string to pass with a key value
-                            data.putString("humidity", humDataVar);//put string to pass with a key value
+                            Bundle data = new Bundle();
+                            data.putString("temperature", tempDataVar);
+                            data.putString("humidity", humDataVar);
                             selectedFragment = new Fragment_SensorData();
                             selectedFragment.setArguments(data);
+                            getSupportFragmentManager().beginTransaction().replace(R.id.mainLayout,
+                                    selectedFragment).commit();
                             break;
                         case R.id.nav_logout:
-                            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                            finish();
+                                // Build an AlertDialog
+                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                                // Set a title for alert dialog
+                                builder.setTitle("LOGOUT!");
+                                // Ask the final question
+                                builder.setMessage("Are you sure to logout?");
+                                // Set the alert dialog yes button click listener
+                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                                        finish();
+                                    }
+                                });
+                                // Set the alert dialog no button click listener
+                                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
+                                    @Override
+                                    public void onClick(DialogInterface dialog, int which) {
+                                        // Do something when No button clicked
+                                        Toast.makeText(getApplicationContext(),
+                                                "No Button Clicked",Toast.LENGTH_SHORT).show();
+                                    }
+                                });
+                                AlertDialog dialog = builder.create();
+                                // Display the alert dialog on interface
+                                dialog.show();
+
+
                             break;
                     }
-                    getSupportFragmentManager().beginTransaction().replace(R.id.mainLayout,
-                            selectedFragment).commit();
+
                     return true;
                 }
             };
@@ -246,11 +323,6 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.logoutMenu: {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                finish();
-                break;
-            }
             case R.id.settingsMenu: {
                 break;
             }
@@ -258,6 +330,12 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
                 startActivity(new Intent(MainActivity.this, DeviceInfoActivity.class));
                 break;
             }
+            case R.id.logoutMenu: {
+                startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                finish();
+                break;
+            }
+
         }
         return super.onOptionsItemSelected(item);
     }
@@ -272,11 +350,11 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     public void messageArrived(String inputTopic, MqttMessage message) throws Exception {
         String payload = new String(message.getPayload());
         if (inputTopic.equals(topic + "/State") && payload.equals("connect")) {
-            deviceStat.setText("connected");
+            deviceStat.setText("Connected");
             deviceStat.setBackgroundResource(R.drawable.ic_connected);
         }
         if (inputTopic.equals(topic + "/State") && payload.equals("disconnect")) {
-            deviceStat.setText("disconnect");
+            deviceStat.setText("Disconnected");
             deviceStat.setBackgroundResource(R.drawable.ic_disconnected);
         }
         if (inputTopic.equals(topic + "/Sensor/Temperature")) {
@@ -293,14 +371,13 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
            // deviceStat.setText(humDataVar);
             Log.d(TAG, payload);
         }
-        //TextView publishedData = findViewById(R.id.textViewMsg);
-        //publishedData.setText(payload);
-        //Log.d(TAG, payload);
+
     }
 
     @Override
     public void deliveryComplete(IMqttDeliveryToken token) {
-        Log.d(TAG, "deliveryComplete");
+
+        Log.d(TAG, "Message Delivered");
     }
     /*
     @Override

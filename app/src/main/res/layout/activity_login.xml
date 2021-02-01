@@ -13,12 +13,14 @@
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintTop_toTopOf="parent"
         app:srcCompat="@drawable/_379"
-        tools:layout_editor_absoluteX="-112dp" />
+        tools:layout_editor_absoluteX="-120dp" />
 
     <EditText
         android:id="@+id/editTextLoginPasswrd"
         android:layout_width="312dp"
         android:layout_height="47dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:background="@drawable/input_box"
         android:drawableStart="@drawable/password_icon"
         android:drawablePadding="12dp"
@@ -42,10 +44,10 @@
         android:text="@string/login"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintHorizontal_bias="0.497"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textViewProdPassword"
-        app:layout_constraintVertical_bias="0.122" />
+        app:layout_constraintVertical_bias="0.129" />
 
     <TextView
         android:id="@+id/textViewProdID"
@@ -77,6 +79,8 @@
         android:id="@+id/editTextLoginMail"
         android:layout_width="312dp"
         android:layout_height="47dp"
+        android:layout_marginStart="5dp"
+        android:layout_marginEnd="5dp"
         android:background="@drawable/input_box"
         android:drawableStart="@drawable/product_icon"
         android:drawablePadding="12dp"
@@ -106,14 +110,14 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.268" />
+        app:layout_constraintVertical_bias="0.278" />
 
     <TextView
         android:id="@+id/textView6"
-        android:layout_width="199dp"
-        android:layout_height="22dp"
-        android:layout_marginStart="10dp"
-        android:layout_marginEnd="10dp"
+        android:layout_width="187dp"
+        android:layout_height="21dp"
+        android:layout_marginStart="15dp"
+        android:layout_marginEnd="15dp"
         android:layout_marginBottom="4dp"
         android:text="copyright © agribots 2021 "
         android:textColor="#040303"
