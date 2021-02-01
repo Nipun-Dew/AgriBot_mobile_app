@@ -46,11 +46,14 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             msg.setQos(2);
             if (this.client.isConnected()) {
                 this.client.publish(publishTopic, msg);
+                Toast.makeText(getApplicationContext(), "start signal sent", Toast.LENGTH_SHORT).show();
             } else {
                 Log.d(TAG, "connection Lost");
+                Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
             }
         } catch (MqttException e) {
             e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -60,11 +63,14 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             msg.setQos(2);
             if (this.client.isConnected()) {
                 this.client.publish(publishTopic, msg);
+                Toast.makeText(getApplicationContext(), "pause signal sent", Toast.LENGTH_SHORT).show();
             } else {
                 Log.d(TAG, "connection Lost");
+                Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
             }
         } catch (MqttException e) {
             e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -74,11 +80,14 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             msg.setQos(2);
             if (this.client.isConnected()) {
                 this.client.publish(publishTopic, msg);
+                Toast.makeText(getApplicationContext(), "stop signal sent", Toast.LENGTH_SHORT).show();
             } else {
                 Log.d(TAG, "connection Lost");
+                Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
             }
         } catch (MqttException e) {
             e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -88,11 +97,14 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             msg.setQos(2);
             if (this.client.isConnected()) {
                 this.client.publish(publishTopic, msg);
+                Toast.makeText(getApplicationContext(), "reset signal sent", Toast.LENGTH_SHORT).show();
             } else {
                 Log.d(TAG, "connection Lost");
+                Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
             }
         } catch (MqttException e) {
             e.printStackTrace();
+            Toast.makeText(getApplicationContext(), "connection failed", Toast.LENGTH_SHORT).show();
         }
     }
 
@@ -124,11 +136,14 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
                 msg.setQos(2);
                 if (this.client.isConnected()) {
                     this.client.publish(publishTopic, msg);
+                    Toast.makeText(getApplicationContext(), "data published!", Toast.LENGTH_SHORT).show();
                 } else {
                     Log.d(TAG, "connection Lost");
+                    Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
                 }
             } catch (MqttException e) {
                 e.printStackTrace();
+                Toast.makeText(getApplicationContext(), "Failed", Toast.LENGTH_SHORT).show();
             }
             clearFields(text1, text2, text3, text4);
         } else {
@@ -153,12 +168,14 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             String subscriberTopic3 = topic + "/Sensor/Humidity";
             String[] subscriberTopics = {subscriberTopic1, subscriberTopic2, subscriberTopic3};
 
-            this.client = new MqttClient("tcp://52.201.221.111:1883", "AndroidThingSub", new MemoryPersistence());
+            this.client = new MqttClient("tcp://52.201.221.111:1883", LoginActivity.loginID, new MemoryPersistence());
+            Log.d(TAG, LoginActivity.loginID);
             this.client.setCallback((MqttCallback) this);
             this.client.connect(extraOps);
             this.client.subscribe(subscriberTopics);
 
             Log.d(TAG, "connectionLost");
+            Toast.makeText(getApplicationContext(), "Connection Lost", Toast.LENGTH_SHORT).show();
         } catch (MqttException e) {
             e.printStackTrace();
             Toast.makeText(getApplicationContext(), "Connection Timeout!!!", Toast.LENGTH_SHORT).show();
