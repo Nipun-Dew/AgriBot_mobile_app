@@ -3,5 +3,7 @@
     <array name="preloaded_fonts" translatable="false">
         <item>@font/</item>
         <item>@font/archivo_black</item>
+        <item>@font/bungee</item>
+        <item>@font/candal</item>
     </array>
 </resources>

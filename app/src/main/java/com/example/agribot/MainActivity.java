@@ -170,26 +170,6 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             //Toast.makeText(MainActivity.this, "Connection Timeout!!!", Toast.LENGTH_SHORT).show();
         }
     }
-    /*
-    private void getProductID() {
-
-        firebaseDatabase = FirebaseDatabase.getInstance();
-        DatabaseReference myRef = firebaseDatabase.getReference(Objects.requireNonNull(LoginActivity.loginID));
-        myRef.addValueEventListener(new ValueEventListener() {
-            @Override
-            public void onDataChange(@NonNull DataSnapshot snapshot) {
-                LoginActivity.User user = snapshot.getValue(LoginActivity.User.class);
-                TextView productIDMsg = findViewById(R.id.textViewMsg);
-                assert user != null;
-                productIDMsg.setText(user.getOwner());
-            }
-
-            @Override
-            public void onCancelled(@NonNull DatabaseError error) {
-
-            }
-        });
-    }*/
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

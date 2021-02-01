@@ -6,19 +6,72 @@
     android:layout_height="match_parent"
     tools:context=".LoginActivity">
 
-    <TextView
-        android:id="@+id/textView_login"
-        android:layout_width="205dp"
-        android:layout_height="58dp"
-        android:fontFamily="@font/archivo_black"
-        android:text="@string/user_login"
-        android:textSize="30sp"
+    <ImageView
+        android:id="@+id/imageView"
+        android:layout_width="846dp"
+        android:layout_height="991dp"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintTop_toTopOf="parent"
+        app:srcCompat="@drawable/_379"
+        tools:layout_editor_absoluteX="-112dp" />
+
+    <EditText
+        android:id="@+id/editTextLoginPasswrd"
+        android:layout_width="312dp"
+        android:layout_height="47dp"
+        android:background="@drawable/input_box"
+        android:drawableStart="@drawable/password_icon"
+        android:drawablePadding="12dp"
+        android:ems="10"
+        android:hint="@string/enter_password"
+        android:inputType="textPassword"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.535"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.143" />
+        app:layout_constraintVertical_bias="0.537" />
+
+    <Button
+        android:id="@+id/Loginbutton"
+        android:layout_width="150dp"
+        android:layout_height="40dp"
+        android:background="@drawable/custom_default_btn"
+        android:text="@string/login"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.51"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/textViewProdPassword"
+        app:layout_constraintVertical_bias="0.122" />
+
+    <TextView
+        android:id="@+id/textViewProdID"
+        android:layout_width="260dp"
+        android:layout_height="18dp"
+        android:text="@string/product_id_is_in_the_product_details"
+        android:textColor="#0C0909"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.3"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginMail"
+        app:layout_constraintVertical_bias="0.02" />
+
+    <TextView
+        android:id="@+id/textViewProdPassword"
+        android:layout_width="240dp"
+        android:layout_height="18dp"
+        android:text="password is in the product details"
+        android:textColor="#120F0F"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.261"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/editTextLoginPasswrd"
+        app:layout_constraintVertical_bias="0.032" />
 
     <EditText
         android:id="@+id/editTextLoginMail"
@@ -34,65 +87,38 @@
         android:paddingEnd="12dp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.434"
+        app:layout_constraintHorizontal_bias="0.493"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/textView_login"
-        app:layout_constraintVertical_bias="0.152" />
+        app:layout_constraintVertical_bias="0.059" />
 
-    <EditText
-        android:id="@+id/editTextLoginPasswrd"
-        android:layout_width="316dp"
+    <TextView
+        android:id="@+id/textView_login"
+        android:layout_width="145dp"
         android:layout_height="53dp"
-        android:background="@drawable/input_box"
-        android:drawableStart="@drawable/password_icon"
-        android:drawablePadding="12dp"
-        android:ems="10"
-        android:hint="@string/enter_password"
-        android:inputType="textPassword"
-        android:paddingStart="12dp"
-        android:paddingEnd="12dp"
+        android:layout_marginStart="40dp"
+        android:layout_marginEnd="40dp"
+        android:fontFamily="@font/archivo_black"
+        android:text="LOGIN"
+        android:textColor="#1E6C65"
+        android:textSize="40sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.438"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.544" />
-
-    <Button
-        android:id="@+id/Loginbutton"
-        android:layout_width="150dp"
-        android:layout_height="40dp"
-        android:background="@drawable/custom_default_btn"
-        android:text="@string/login"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.509"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/textViewProdPassword"
-        app:layout_constraintVertical_bias="0.236" />
+        app:layout_constraintVertical_bias="0.268" />
 
     <TextView
-        android:id="@+id/textViewProdID"
-        android:layout_width="328dp"
+        android:id="@+id/textView6"
+        android:layout_width="199dp"
         android:layout_height="22dp"
-        android:text="@string/product_id_is_in_the_product_details"
+        android:layout_marginStart="10dp"
+        android:layout_marginEnd="10dp"
+        android:layout_marginBottom="4dp"
+        android:text="copyright © agribots 2021 "
+        android:textColor="#040303"
+        android:textSize="16sp"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.451"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLoginMail"
-        app:layout_constraintVertical_bias="0.066" />
-
-    <TextView
-        android:id="@+id/textViewProdPassword"
-        android:layout_width="240dp"
-        android:layout_height="18dp"
-        android:text="password is in the product details"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.372"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/editTextLoginPasswrd"
-        app:layout_constraintVertical_bias="0.138" />
-
+        app:layout_constraintStart_toStartOf="parent" />
 </androidx.constraintlayout.widget.ConstraintLayout>
