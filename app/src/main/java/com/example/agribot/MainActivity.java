@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     private void subscribeToBroker() {
         try {
             MqttConnectOptions extraOps = new MqttConnectOptions();
-            extraOps.setConnectionTimeout(30);
+            extraOps.setConnectionTimeout(2);
             extraOps.setAutomaticReconnect(true);
             extraOps.setKeepAliveInterval(15);
             //extraOps.setUserName("metana username eka dapan");
@@ -331,6 +331,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
                 break;
             }
             case R.id.logoutMenu: {
+                LoginActivity.dbTimeout = true;
                 startActivity(new Intent(MainActivity.this, LoginActivity.class));
                 finish();
                 break;
