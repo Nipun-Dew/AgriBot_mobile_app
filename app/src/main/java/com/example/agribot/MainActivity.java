@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             String subscriberTopic3 = topic + "/Sensor/Humidity";
             String[] subscriberTopics = {subscriberTopic1, subscriberTopic2, subscriberTopic3};
 
-            this.client = new MqttClient("tcp://52.201.221.111:1883", LoginActivity.loginID, new MemoryPersistence());
+            this.client = new MqttClient("tcp://192.168.1.4:1883", LoginActivity.loginID, new MemoryPersistence());
             Log.d(TAG, LoginActivity.loginID);
             this.client.setCallback((MqttCallback) this);
             this.client.connect(extraOps);

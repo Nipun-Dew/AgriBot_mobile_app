@@ -4,11 +4,11 @@
     <item
         android:id="@+id/nav_config"
         android:icon="@drawable/ic_baseline_miscellaneous_services_24"
-        android:title="Configuration" />
+        android:title="Panel" />
     <item
         android:id="@+id/nav_sensor_data"
         android:icon="@drawable/ic_baseline_download_24"
-        android:title="Sensor Data" />
+        android:title="Readings" />
     <item
         android:id="@+id/nav_logout"
         android:icon="@drawable/ic_baseline_logout"
