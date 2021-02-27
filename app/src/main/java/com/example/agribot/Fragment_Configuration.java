@@ -18,8 +18,4 @@ public class Fragment_Configuration extends Fragment {
         ViewGroup root = (ViewGroup)inflater.inflate(R.layout.fragment_config, container, false);
         return root;
     }
-
-
-
-
 }

@@ -268,6 +268,11 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
                             getSupportFragmentManager().beginTransaction().replace(R.id.mainLayout,
                                     selectedFragment).commit();
                             break;
+                        case R.id.nav_params:
+                            selectedFragment = new Fragment_Tune();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.mainLayout,
+                                    selectedFragment).commit();
+                            break;
                         case R.id.nav_sensor_data:
                             Bundle data = new Bundle();
                             data.putString("temperature", tempDataVar);
@@ -278,34 +283,9 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
                                     selectedFragment).commit();
                             break;
                         case R.id.nav_logout:
-                                // Build an AlertDialog
-                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                                // Set a title for alert dialog
-                                builder.setTitle("LOGOUT!");
-                                // Ask the final question
-                                builder.setMessage("Are you sure to logout?");
-                                // Set the alert dialog yes button click listener
-                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                                        finish();
-                                    }
-                                });
-                                // Set the alert dialog no button click listener
-                                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        // Do something when No button clicked
-                                        Toast.makeText(getApplicationContext(),
-                                                "No Button Clicked",Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                                AlertDialog dialog = builder.create();
-                                // Display the alert dialog on interface
-                                dialog.show();
-
-
+                            selectedFragment = new Fragment_Device();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.mainLayout,
+                                    selectedFragment).commit();
                             break;
                     }
 
