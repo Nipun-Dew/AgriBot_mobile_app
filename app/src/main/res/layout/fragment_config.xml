@@ -9,80 +9,73 @@
 
     <androidx.constraintlayout.widget.ConstraintLayout
         android:id="@+id/constraintLayout2"
-        android:layout_width="368dp"
-        android:layout_height="190dp"
-        android:layout_marginBottom="208dp"
+        android:layout_width="339dp"
+        android:layout_height="379dp"
         android:background="@drawable/radius"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/constraintLayout"
-        app:layout_constraintVertical_bias="0.333">
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintVertical_bias="0.678">
 
         <Button
             android:id="@+id/button4"
-            android:layout_width="97dp"
-            android:layout_height="54dp"
-            android:background="@drawable/custom_control_btn"
+            android:layout_width="110dp"
+            android:layout_height="105dp"
+            android:background="@drawable/reset_btn"
             android:onClick="publishResetSignalToBroker"
-            android:text="@string/reset"
             android:textColor="@android:color/white"
             android:textColorLink="#1A39EA"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.94"
+            app:layout_constraintHorizontal_bias="0.865"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.144" />
+
+        <Button
+            android:id="@+id/button3"
+            android:layout_width="116dp"
+            android:layout_height="108dp"
+            android:background="@drawable/stop_btn"
+            android:clickable="true"
+            android:onClick="publishStopSignalToBroker"
+            android:textColor="@android:color/white"
+            android:textColorLink="#1A39EA"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.121"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.798" />
+
+        <Button
+            android:id="@+id/button"
+            android:layout_width="107dp"
+            android:layout_height="100dp"
+            android:background="@drawable/start_btn"
+            android:clickable="true"
+            android:onClick="publishStartSignalToBroker"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.151"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
             app:layout_constraintVertical_bias="0.147" />
 
         <Button
-            android:id="@+id/button3"
-            android:layout_width="98dp"
-            android:layout_height="53dp"
-            android:background="@drawable/custom_control_btn"
-            android:clickable="true"
-            android:onClick="publishStopSignalToBroker"
-            android:text="@string/stop"
-            android:textColor="@android:color/white"
-            android:textColorLink="#1A39EA"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.153" />
-
-        <Button
-            android:id="@+id/button"
-            android:layout_width="91dp"
-            android:layout_height="53dp"
-            android:background="@drawable/custom_control_btn"
-            android:clickable="true"
-            android:onClick="publishStartSignalToBroker"
-            android:text="@string/start"
-            android:textColor="@android:color/white"
-            android:textColorLink="#1A39EA"
-            app:layout_constraintBottom_toBottomOf="parent"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.057"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.153" />
-
-        <Button
             android:id="@+id/button2"
-            android:layout_width="279dp"
-            android:layout_height="78dp"
-            android:layout_marginBottom="16dp"
-            android:background="@drawable/custom_control_btn"
+            android:layout_width="113dp"
+            android:layout_height="107dp"
+            android:background="@drawable/pause_btn"
             android:clickable="true"
             android:onClick="publishPauseSignalToBroker"
-            android:text="@string/pause"
-            android:textColor="@android:color/white"
-            android:textColorLink="#1A39EA"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.505"
-            app:layout_constraintStart_toStartOf="parent" />
+            app:layout_constraintHorizontal_bias="0.862"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintVertical_bias="0.795" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

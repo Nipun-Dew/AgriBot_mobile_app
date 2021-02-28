@@ -10,14 +10,11 @@
     <application
         android:allowBackup="true"
         android:icon="@mipmap/ic_launcher"
-        android:label="AGRIBOTS"
+        android:label="AGRIBOT"
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/CustomAppTheme">
-        <activity android:name=".DeviceInfoActivity" />
         <activity android:name=".LoginActivity"/>
-
-        <activity android:name=".RegistrationActivity" />
         <activity android:name=".MainActivity" />
 
         <activity

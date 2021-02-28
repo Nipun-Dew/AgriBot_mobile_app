@@ -18,8 +18,8 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.316"
-        app:srcCompat="@drawable/panel_back2" />
+        app:layout_constraintVertical_bias="0.852"
+        app:srcCompat="@drawable/app_background2" />
 
     <TextView
         android:id="@+id/textViewDeviceStat"
@@ -45,7 +45,7 @@
         android:fontFamily="sans-serif-black"
         android:text="Robot :"
         android:textAlignment="center"
-        android:textColor="#26514D"
+        android:textColor="#ffffff"
         android:textSize="20sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textViewDeviceStat"
