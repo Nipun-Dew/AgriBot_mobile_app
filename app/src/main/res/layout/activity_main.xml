@@ -23,33 +23,33 @@
 
     <TextView
         android:id="@+id/textViewDeviceStat"
-        android:layout_width="150dp"
-        android:layout_height="39dp"
+        android:layout_width="121dp"
+        android:layout_height="35dp"
 
-        android:layout_marginTop="24dp"
-        android:layout_marginEnd="72dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="16dp"
         android:background="@drawable/ic_disconnected"
         android:paddingTop="7dp"
-        android:text="Not Connected"
+        android:text="Disonnected"
         android:textAlignment="center"
         android:textColor="@android:color/white"
-        android:textSize="18sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
         android:id="@+id/textViewDevice"
-        android:layout_width="86dp"
-        android:layout_height="35dp"
-        android:layout_marginTop="28dp"
+        android:layout_width="81dp"
+        android:layout_height="24dp"
+        android:layout_marginTop="16dp"
         android:fontFamily="sans-serif-black"
         android:text="Robot :"
         android:textAlignment="center"
         android:textColor="#ffffff"
-        android:textSize="20sp"
+        android:textSize="15sp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintEnd_toStartOf="@+id/textViewDeviceStat"
-        app:layout_constraintHorizontal_bias="0.901"
+        app:layout_constraintHorizontal_bias="1.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
