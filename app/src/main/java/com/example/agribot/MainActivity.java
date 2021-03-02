@@ -303,17 +303,31 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.settingsMenu: {
-                break;
-            }
+            case R.id.settingsMenu:
             case R.id.deviceInfo: {
-                startActivity(new Intent(MainActivity.this, DeviceInfoActivity.class));
                 break;
             }
             case R.id.logoutMenu: {
-                LoginActivity.dbTimeout = true;
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Logout!");
+                builder.setMessage("Are you sure you want to logout?");
+                builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        LoginActivity.dbTimeout = true;
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),
+                                "Logout Cancelled!",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
                 break;
             }
 
