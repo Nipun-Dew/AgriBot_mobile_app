@@ -20,23 +20,23 @@
 
         <Button
             android:id="@+id/button4"
-            android:layout_width="110dp"
-            android:layout_height="105dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:background="@drawable/reset_button_full"
             android:onClick="publishResetSignalToBroker"
             android:textColor="@android:color/white"
             android:textColorLink="#1A39EA"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.865"
+            app:layout_constraintHorizontal_bias="0.934"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.144" />
+            app:layout_constraintVertical_bias="0.056" />
 
         <Button
             android:id="@+id/button3"
-            android:layout_width="116dp"
-            android:layout_height="108dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:background="@drawable/stop_button_full"
             android:clickable="true"
             android:onClick="publishStopSignalToBroker"
@@ -44,38 +44,38 @@
             android:textColorLink="#1A39EA"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.121"
+            app:layout_constraintHorizontal_bias="0.51"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.798" />
+            app:layout_constraintVertical_bias="0.056" />
 
         <Button
             android:id="@+id/button"
-            android:layout_width="107dp"
-            android:layout_height="100dp"
+            android:layout_width="96dp"
+            android:layout_height="96dp"
             android:background="@drawable/start_button_full"
             android:clickable="true"
             android:onClick="publishStartSignalToBroker"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.151"
+            app:layout_constraintHorizontal_bias="0.065"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.147" />
+            app:layout_constraintVertical_bias="0.056" />
 
         <Button
             android:id="@+id/button2"
-            android:layout_width="113dp"
-            android:layout_height="107dp"
+            android:layout_width="230dp"
+            android:layout_height="230dp"
             android:background="@drawable/pause_button_full"
             android:clickable="true"
             android:onClick="publishPauseSignalToBroker"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintHorizontal_bias="0.862"
+            app:layout_constraintHorizontal_bias="0.495"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent"
-            app:layout_constraintVertical_bias="0.795" />
+            app:layout_constraintVertical_bias="0.832" />
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 
