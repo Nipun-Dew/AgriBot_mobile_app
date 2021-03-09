@@ -38,4 +38,8 @@
     <string name="notConnect">Not Connected</string>
     <string name="connectBroker">Connected to broker</string>
     <string name="connect">CONNECT</string>
+
+    <!-- TODO: Remove or change this placeholder text -->
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+    <string name="reset_botton_will_erase_these_settings">* Reset botton will erase these settings</string>
 </resources>

@@ -206,7 +206,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     private void subscribeToBroker() {
         try {
             MqttConnectOptions extraOps = new MqttConnectOptions();
-            extraOps.setConnectionTimeout(30);
+            extraOps.setConnectionTimeout(2);
             extraOps.setAutomaticReconnect(true);
             extraOps.setKeepAliveInterval(15);
             //extraOps.setUserName("metana username eka dapan");
@@ -218,7 +218,7 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
             String subscriberTopic3 = topic + "/Sensor/Humidity";
             String[] subscriberTopics = {subscriberTopic1, subscriberTopic2, subscriberTopic3};
 
-            this.client = new MqttClient("tcp://52.201.221.111:1883", LoginActivity.loginID, new MemoryPersistence());
+            this.client = new MqttClient("tcp://192.168.1.4:1883", LoginActivity.loginID, new MemoryPersistence());
             Log.d(TAG, LoginActivity.loginID);
             this.client.setCallback((MqttCallback) this);
             this.client.connect(extraOps);
@@ -268,6 +268,11 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
                             getSupportFragmentManager().beginTransaction().replace(R.id.mainLayout,
                                     selectedFragment).commit();
                             break;
+                        case R.id.nav_params:
+                            selectedFragment = new Fragment_Tune();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.mainLayout,
+                                    selectedFragment).commit();
+                            break;
                         case R.id.nav_sensor_data:
                             Bundle data = new Bundle();
                             data.putString("temperature", tempDataVar);
@@ -278,34 +283,9 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
                                     selectedFragment).commit();
                             break;
                         case R.id.nav_logout:
-                                // Build an AlertDialog
-                                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
-                                // Set a title for alert dialog
-                                builder.setTitle("LOGOUT!");
-                                // Ask the final question
-                                builder.setMessage("Are you sure to logout?");
-                                // Set the alert dialog yes button click listener
-                                builder.setPositiveButton("Yes", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                                        finish();
-                                    }
-                                });
-                                // Set the alert dialog no button click listener
-                                builder.setNegativeButton("No", new DialogInterface.OnClickListener() {
-                                    @Override
-                                    public void onClick(DialogInterface dialog, int which) {
-                                        // Do something when No button clicked
-                                        Toast.makeText(getApplicationContext(),
-                                                "No Button Clicked",Toast.LENGTH_SHORT).show();
-                                    }
-                                });
-                                AlertDialog dialog = builder.create();
-                                // Display the alert dialog on interface
-                                dialog.show();
-
-
+                            selectedFragment = new Fragment_Device();
+                            getSupportFragmentManager().beginTransaction().replace(R.id.mainLayout,
+                                    selectedFragment).commit();
                             break;
                     }
 
@@ -323,16 +303,31 @@ public class MainActivity extends AppCompatActivity implements MqttCallback {
     @Override
     public boolean onOptionsItemSelected(@NonNull MenuItem item) {
         switch (item.getItemId()) {
-            case R.id.settingsMenu: {
-                break;
-            }
+            case R.id.settingsMenu:
             case R.id.deviceInfo: {
-                startActivity(new Intent(MainActivity.this, DeviceInfoActivity.class));
                 break;
             }
             case R.id.logoutMenu: {
-                startActivity(new Intent(MainActivity.this, LoginActivity.class));
-                finish();
+                AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity.this);
+                builder.setTitle("Logout!");
+                builder.setMessage("Are you sure you want to logout?");
+                builder.setPositiveButton("yes", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        LoginActivity.dbTimeout = true;
+                        startActivity(new Intent(MainActivity.this, LoginActivity.class));
+                        finish();
+                    }
+                });
+                builder.setNegativeButton("no", new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int which) {
+                        Toast.makeText(getApplicationContext(),
+                                "Logout Cancelled!",Toast.LENGTH_SHORT).show();
+                    }
+                });
+                AlertDialog dialog = builder.create();
+                dialog.show();
                 break;
             }
 

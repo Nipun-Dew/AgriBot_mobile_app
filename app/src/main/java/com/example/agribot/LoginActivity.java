@@ -3,6 +3,7 @@ package com.example.agribot;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.Gravity;
 import android.view.View;
 import android.widget.Button;
@@ -19,6 +20,10 @@ import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
+
+import java.util.Timer;
+import java.util.TimerTask;
+
 public class LoginActivity extends AppCompatActivity {
 
     private EditText userProductId;
@@ -28,6 +33,10 @@ public class LoginActivity extends AppCompatActivity {
     private Button loginBtn;
     private FirebaseDatabase firebaseDatabase;
     private ProgressDialog progressDialog;
+
+    private String user_id;
+    private String user_password;
+    public static boolean dbTimeout = true;
 
     public static String loginID;
     public static String userTopic;
@@ -47,14 +56,32 @@ public class LoginActivity extends AppCompatActivity {
         loginBtn.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                String user_id = userProductId.getText().toString().trim();
-                String user_password = userPassword.getText().toString().trim();
+                user_id = userProductId.getText().toString().trim();
+                user_password = userPassword.getText().toString().trim();
                 if (user_id.isEmpty() || user_password.isEmpty()) {
                    Toast toast1 = Toast.makeText(LoginActivity.this, "Please fill all the fields!", Toast.LENGTH_SHORT);
                     toast1.setGravity(Gravity.TOP,0,250);
                     toast1.show();
                 } else {
-                    validate(user_id, user_password);
+                    Handler hd = new Handler();
+                    Handler hd1 = new Handler();
+                    hd.postAtTime(new Runnable() {
+                        @Override
+                        public void run() {
+                            validate(user_id, user_password);
+                        }
+                    }, 3000);
+                    hd1.postDelayed(new Runnable() {
+                        @Override
+                        public void run() {
+                            if (dbTimeout) {
+                                userProductId.setText("");
+                                userPassword.setText("");
+                                progressDialog.dismiss();
+                                toast.show();
+                            }
+                        }
+                    }, 4000);
                 }
             }
         });
@@ -112,6 +139,7 @@ public class LoginActivity extends AppCompatActivity {
         progressDialog.setMessage("Logging In...");
         progressDialog.show();
 
+
         firebaseDatabase = FirebaseDatabase.getInstance();
         DatabaseReference myDBRef = firebaseDatabase.getReference(product_ID);
         myDBRef.addValueEventListener(new ValueEventListener() {
@@ -121,6 +149,7 @@ public class LoginActivity extends AppCompatActivity {
                 System.out.println(user);
                 progressDialog.dismiss();
                 if (user != null) {
+                    dbTimeout = false;
                     if (user.getPassword().equals(user_password)) {
                         finish();
                         loginID = product_ID;
