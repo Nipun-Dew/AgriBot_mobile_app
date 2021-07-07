@@ -2,17 +2,8 @@
 <html>
 <head>
 	<style>
-		.column {
-  float: left;
-  width: 33.33%;
-  padding: 5px;
-}
-		
-		.row::after {
-  content: "";
-  clear: both;
-  display: table;
-}
+		.column {float: left; width: 33.33%; padding: 5px;}
+		.row::after { content: ""; clear: both; display: table; }
 	</style>
 	
 </head>
