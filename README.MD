@@ -17,6 +17,7 @@ using those informations robot will go to each point and drill the soil, plant a
       </div><br>
 			<div>The main purpose of our Robot is plant seeds over large farm areas!!!!</div><br>
       <div>In the system, robot will connected to the AWS server, inside that robot and app will connect through mqtt broker. Mainly this application sends messages which critical in the system like start, stop, pause signals. Also initial configuration and also connectivity of the device. In the robot side it will receive these and also output sensor data to the broker. Mobile application is display these data. For these tasks we use MQTT architecture and protocol which is the best solution for IOT. This is different from normal http architecture and for that we use java library - paho.mqtt lib for this implementation. Android application made from java (native approach) which is run faster. If you more interested about this App and project, project site attached to this markdown.
+	      https://cepdnaclk.github.io/e16-3yp-agribot/
       </div>
 		</p>
 	<br>
