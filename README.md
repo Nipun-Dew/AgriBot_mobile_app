@@ -1,11 +1,10 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<style>
-		.column {float: left; width: 33.33%; padding: 5px;}
-		.row::after { content: ""; clear: both; display: table; }
-	</style>
-	
+<style>
+.column {float: left; width: 33.33%; padding: 5px;}
+.row::after { content: ""; clear: both; display: table; }
+</style>
 </head>
 <body>
 	<h2>Autonomous Agricultural Robot - Mobile Application</h2>
