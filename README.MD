@@ -31,6 +31,7 @@ using those informations robot will go to each point and drill the soil, plant a
 		<tr>
 			<td><img src="ui4.JPG" align="left"></td>
 			<td><img src="ui5.JPG" align="center"></td>
+			<td><img src="ss2.png" align="center"></td>
 		</tr>
 	</table>
 	
