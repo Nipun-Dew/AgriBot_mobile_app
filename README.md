@@ -1,9 +1,23 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<h2>Autonomous Agricultural Robot - Mobile Application</h2>
+	<style>
+		.column {
+  float: left;
+  width: 33.33%;
+  padding: 5px;
+}
+		
+		.row::after {
+  content: "";
+  clear: both;
+  display: table;
+}
+	</style>
+	
 </head>
 <body>
+	<h2>Autonomous Agricultural Robot - Mobile Application</h2>
 	<h4>Group Members</h4>
 		<div>
 			<div>Denuke Dissanayake - E/16/089 - e16089@eng.pdn.ac.lk</div>
