@@ -16,7 +16,7 @@
 using those informations robot will go to each point and drill the soil, plant a seed.
       </div><br>
 			<div>The main purpose of our Robot is plant seeds over large farm areas!!!!</div><br>
-      <div>As we said earlier Our mobile app give the basic control signals and parameters of the field to the AWS server and the robot will fetch it and create a map of the field using some algorithms, then using the encoders of the gear motors and gyroscope we can move the robot throughout the map and plant the seeds, After we send the basic params from our mobile app whole process works as a autonomous manner. User have to give the number of rows he want to seed, gap between two seeds and two rows and length of a each row. Using this method, we can cover the whole area.
+      <div>In the system, robot will connected to the AWS server, inside that robot and app will connect through mqtt broker. Mainly this application sends messages which critical in the system like start, stop, pause signals. Also initial configuration and also connectivity of the device. In the robot side it will receive these and also output sensor data to the broker. Mobile application is display these data. For these tasks we use MQTT architecture and protocol which is the best solution for IOT. This is different from normal http architecture and for that we use java library - paho.mqtt lib for this implementation. Android application made from java (native approach) which is run faster. If you more interested about this App and project, project site attached to this markdown.
       </div>
 		</p>
 	<br>
@@ -31,7 +31,6 @@ using those informations robot will go to each point and drill the soil, plant a
 		<tr>
 			<td><img src="ui4.JPG" align="left"></td>
 			<td><img src="ui5.JPG" align="center"></td>
-			<td><img src="ss2.png" align="center" height="25%></td>
 		</tr>
 	</table>
 	
