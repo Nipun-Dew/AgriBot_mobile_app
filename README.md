@@ -24,13 +24,13 @@ using those informations robot will go to each point and drill the soil, plant a
 	<br>
 	<div class="row">
   			<div class="column">
-    			<img src="ui1.JPG" style="width:100%">
+    			<img src="ui1.JPG" style="width:50%">
  			</div>
   			<div class="column">
-    			<img src="ui2.JPG" style="width:100%">
+    			<img src="ui2.JPG" style="width:50%">
   			</div>
   			<div class="column">
-    			<img src="ui3.JPG" style="width:100%">
+    			<img src="ui3.JPG" style="width:50%">
  	 		</div>
 	</div>
 	
