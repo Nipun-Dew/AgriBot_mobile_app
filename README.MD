@@ -22,9 +22,9 @@ using those informations robot will go to each point and drill the soil, plant a
 	<br>
 	<h4>Mobile App Screen Shots</h4>
 	<br>
-	<img src="ui1.JPG" >
-	<img src="ui2.JPG" >
-    	<img src="ui3.JPG" width="50%">
+	<img src="ui1.JPG" width="30%" >
+	<img src="ui2.JPG" width="30%">
+    	<img src="ui3.JPG" width="30%">
 	</div>
 	
    <h4>Advisers</h4>
