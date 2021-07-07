@@ -33,8 +33,7 @@ using those informations robot will go to each point and drill the soil, plant a
 			<td><img src="ui5.JPG" align="center"></td>
     			<td><img src="splash.png" align="right"></td>
 		</tr>
-		</table>
-	</div>
+	</table>
 	
    <h4>Advisers</h4>
     <div> Dr Isuru Nawinna </div>
